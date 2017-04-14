@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.reactnativenavigation.NavigationApplication;
+import com.wix.interactable.Interactable;
 import com.oblador.vectoricons.VectorIconsPackage;
 
 import java.util.Arrays;
@@ -23,7 +24,8 @@ public class MainApplication extends NavigationApplication {
     // Add the packages you require here.
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
-            new VectorIconsPackage()
+            new VectorIconsPackage(),
+            new Interactable()
     );
   }
 

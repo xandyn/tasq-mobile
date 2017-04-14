@@ -9,6 +9,7 @@
 	"dependencies": {
 		"react": "16.0.0-alpha.6",
 		"react-native": "0.43.3",
+		"react-native-interactable": "^0.0.8",
 		"react-native-navigation": "next",
 		"react-native-vector-icons": "^4.0.1"
 	},

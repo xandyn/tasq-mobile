@@ -3548,6 +3548,10 @@ react-devtools-core@^2.0.8:
     cross-env "^3.1.4"
     ws "^2.0.3"
 
+react-native-interactable@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/react-native-interactable/-/react-native-interactable-0.0.8.tgz#f4a175daccded50aa7edc67fb65f64e325eec70c"
+
 react-native-navigation@next:
   version "2.0.0-experimental.299"
   resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.0.0-experimental.299.tgz#691235048792537525c0b97ceaf0194a2a6ea7ed"
