@@ -9,6 +9,13 @@ const icons = {
   'ios-person--active--big': [50, '#fff'],
   'ios-person--active--very-big': [100, '#fff'],
 
+  'ios-search': [30, '#000000'],
+  'ios-search--big': [50, '#bbb'],
+
+  'ios-search--active': [30, '#fff'],
+  'ios-search--active--big': [50, '#fff'],
+  'ios-search--active--very-big': [100, '#fff'],
+
   'ios-people': [30, '#7CBB00'],
   'ios-people--active': [30, '#FF6D27'],
 

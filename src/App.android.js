@@ -1,40 +1,40 @@
 import React from 'react';
 import { Navigation } from 'react-native-navigation';
+import { Provider } from 'react-redux';
 import { registerScreens } from './screens';
-import { iconsLoaded } from './utils/AppIcons';
+import { iconsMap, iconsLoaded } from './utils/AppIcons';
+import configureStore from './store/configureStore';
 
-registerScreens();
+const store = configureStore();
 
-
-const navigatorStyle = {
-  statusBarColor: 'black',
-  statusBarTextColorScheme: 'light',
-  navigationBarColor: 'black',
-  navBarBackgroundColor: '#0a0a0a',
-  navBarTextColor: 'white',
-  navBarButtonColor: 'white',
-  tabBarButtonColor: 'red',
-  tabBarSelectedButtonColor: 'red',
-  tabBarBackgroundColor: 'white',
-  topBarElevationShadowEnabled: false,
-  navBarHideOnScroll: true,
-  tabBarHidden: true,
-  drawUnderTabBar: true
-};
+registerScreens(store, Provider);
 
 
 const startApp = () => {
   Navigation.startSingleScreenApp({
     screen: {
       screen: 'tasq.FirstTabScreen',
-      title: 'first tab',
-      navigatorStyle,
-      leftButtons: [
-        {
-          id: 'sideMenu'
-        }
-      ]
-    }
+      title: '',
+      navigatorStyle: {},
+      navigatorButtons: {
+        leftButtons: [
+          {
+            title: 'Profile',
+            id: 'profile',
+            icon: iconsMap['ios-person']
+          }
+        ],
+        rightButtons: [
+          {
+            title: 'Search',
+            id: 'search',
+            icon: iconsMap['ios-search']
+          }
+        ]
+      }
+    },
+    passProps: {},
+    animationType: 'slide-down'
   });
 };
 

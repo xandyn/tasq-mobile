@@ -4,14 +4,27 @@
 	"private": true,
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
+		"test": "jest",
+    "test:watch": "jest --watch"
 	},
 	"dependencies": {
+		"immutable": "^3.8.1",
+		"moment": "^2.18.1",
+		"normalizr": "^3.2.2",
+		"prop-types": "^15.5.8",
 		"react": "16.0.0-alpha.6",
+		"react-immutable-proptypes": "^2.1.0",
 		"react-native": "0.43.3",
+		"react-native-immutable-list-view": "^0.4.3",
 		"react-native-interactable": "^0.0.8",
 		"react-native-navigation": "2.0.0-experimental.300",
-		"react-native-vector-icons": "^4.0.1"
+		"react-native-vector-icons": "^4.0.1",
+		"react-redux": "^5.0.4",
+		"redux": "^3.6.0",
+		"redux-form": "^6.6.3",
+		"redux-saga": "^0.14.6",
+		"reselect": "^3.0.0",
+		"whatwg-fetch": "^2.0.3"
 	},
 	"devDependencies": {
 		"babel-eslint": "^7.2.2",
@@ -25,9 +38,16 @@
 		"eslint-plugin-react-native": "^2.3.1",
 		"jest": "19.0.2",
 		"react-test-renderer": "16.0.0-alpha.6",
-		"reactotron-react-native": "^1.9.1"
+		"reactotron-react-native": "^1.9.1",
+		"reactotron-redux": "^1.9.1",
+		"reactotron-redux-saga": "^1.9.1",
+		"redux-saga-testing": "^1.0.2",
+		"remote-redux-devtools": "^0.5.7"
 	},
 	"jest": {
-		"preset": "react-native"
+		"preset": "react-native",
+		"setupFiles": [
+			"./src/utils/asyncStorageMock.js"
+		]
 	}
 }

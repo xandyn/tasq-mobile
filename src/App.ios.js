@@ -1,46 +1,40 @@
 import React from 'react';
 import { Navigation } from 'react-native-navigation';
+import { Provider } from 'react-redux';
 import { registerScreens } from './screens';
 import { iconsMap, iconsLoaded } from './utils/AppIcons';
+import configureStore from './store/configureStore';
 
-registerScreens();
+const store = configureStore();
 
-
-const navigatorStyle = {
-  statusBarColor: '#831d19',
-  navigationBarColor: '#339999',
-  navBarBackgroundColor: '#339999',
-  navBarTextColor: '#ffffff',
-  navBarButtonColor: '#ffffff',
-  statusBarTextColorScheme: 'light',
-  navBarHidden: true,
-  tabBarButtonColor: 'red',
-  tabBarSelectedButtonColor: 'red',
-  tabBarBackgroundColor: 'red'
-};
+registerScreens(store, Provider);
 
 
 const startApp = () => {
-  Navigation.startTabBasedApp({
-    tabs: [
-      {
-        label: 'One',
-        screen: 'tasq.FirstTabScreen',
-        icon: iconsMap['ios-person'],
-        selectedIcon: iconsMap['ios-person--active'],
-        title: 'Hello World',
-        navigatorStyle
-      },
-      {
-        label: 'Two',
-        screen: 'tasq.SecondTabScreen',
-        icon: iconsMap['ios-chatbubbles'],
-        selectedIcon: iconsMap['ios-chatbubbles--active'],
-        title: 'Test Title 2',
-        navigatorStyle
+  Navigation.startSingleScreenApp({
+    screen: {
+      screen: 'tasq.FirstTabScreen',
+      title: '',
+      navigatorStyle: {},
+      navigatorButtons: {
+        leftButtons: [
+          {
+            title: 'Profile',
+            id: 'profile',
+            icon: iconsMap['ios-person']
+          }
+        ],
+        rightButtons: [
+          {
+            title: 'Search',
+            id: 'search',
+            icon: iconsMap['ios-search']
+          }
+        ]
       }
-    ],
-    animationType: 'fade'
+    },
+    passProps: {},
+    animationType: 'slide-down'
   });
 };
 
