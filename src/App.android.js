@@ -1,4 +1,7 @@
+import 'whatwg-fetch';
+
 import React from 'react';
+import { AsyncStorage } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
 import { registerScreens } from './screens';
@@ -10,7 +13,7 @@ const store = configureStore();
 registerScreens(store, Provider);
 
 
-const startApp = () => {
+export const startApp = () => {
   Navigation.startSingleScreenApp({
     screen: {
       screen: 'tasq.FirstTabScreen',
@@ -38,7 +41,25 @@ const startApp = () => {
   });
 };
 
+export const startLogin = () => {
+  Navigation.startSingleScreenApp({
+    screen: {
+      screen: 'tasq.Login',
+      navigatorStyle: {
+        navBarHidden: true,
+      },
+    },
+    animationType: 'slide-down'
+  });
+};
+
 
 iconsLoaded.then(() => {
-  startApp();
+  AsyncStorage.getItem('jwt').then(jwt => {
+    if (jwt) {
+      startApp();
+    } else {
+      startLogin();
+    }
+  });
 });

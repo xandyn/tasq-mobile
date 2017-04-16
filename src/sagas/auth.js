@@ -8,6 +8,7 @@ import { tasksClear } from '../actions/tasks';
 import { usersClear } from '../actions/users';
 import { uiClear } from '../actions/ui';
 import Api, { login, signup } from '../api';
+import { startApp } from '../App';
 
 
 export function* authorize({ payload }) {
@@ -20,6 +21,7 @@ export function* authorize({ payload }) {
 
     const { token } = response;
     yield call(Api.storeItems, { jwt: token });
+    yield call(startApp);
   } else {
     yield put(loginFailure(error));
     yield put(stopSubmit('LoginForm', error));
@@ -47,6 +49,7 @@ export function* register({ payload }) {
 
     const { token } = response;
     yield call(Api.storeItems, { jwt: token });
+    yield call(startApp);
   } else {
     yield put(signupFailure(error));
     yield put(stopSubmit('SignupForm', error));
