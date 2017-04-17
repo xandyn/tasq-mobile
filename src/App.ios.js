@@ -16,9 +16,7 @@ registerScreens(store, Provider);
 export const startApp = () => {
   Navigation.startSingleScreenApp({
     screen: {
-      screen: 'tasq.FirstTabScreen',
-      title: '',
-      navigatorStyle: {},
+      screen: 'tasq.Home',
       navigatorButtons: {
         leftButtons: [
           {
@@ -36,8 +34,7 @@ export const startApp = () => {
         ]
       }
     },
-    passProps: {},
-    animationType: 'slide-down'
+    animationType: 'fade'
   });
 };
 
@@ -49,7 +46,7 @@ export const startLogin = () => {
         navBarHidden: true,
       },
     },
-    animationType: 'slide-down'
+    animationType: 'fade'
   });
 };
 

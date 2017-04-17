@@ -24,7 +24,16 @@ function configureStore(initialState) {
     )
   );
 
-  sagaMiddleware.run(rootSaga);
+  let rootTask = sagaMiddleware.run(rootSaga);
+  if (module.hot) {
+    module.hot.accept('../reducers', () => {
+      store.replaceReducer(rootReducer);
+    });
+    module.hot.accept('./sagas', () => {
+      rootTask.cancel();
+      rootTask = sagaMiddleware.run(rootSaga);
+    });
+  }
   return store;
 }
 

@@ -1,12 +1,10 @@
 import { Navigation } from 'react-native-navigation';
 
-import Login from './containers/Login/Login'
-import FirstTabScreen from './FirstTabScreen';
-import SecondTabScreen from './SecondTabScreen';
+import Home from './containers/Home/Home';
+import Login from './containers/Login/Login';
 
 
 export function registerScreens(store, Provider) {
+  Navigation.registerComponent('tasq.Home', () => Home, store, Provider);
   Navigation.registerComponent('tasq.Login', () => Login, store, Provider);
-  Navigation.registerComponent('tasq.FirstTabScreen', () => FirstTabScreen, store, Provider);
-  Navigation.registerComponent('tasq.SecondTabScreen', () => SecondTabScreen, store, Provider);
 }

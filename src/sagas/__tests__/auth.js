@@ -11,6 +11,7 @@ import { authorize, register } from '../auth';
 describe('`authorize` Saga test', () => {
   const validCredentials = { email: 'email@example.com', password: '123456' };
   const token = 'testJWT';
+  const startApp = jest.fn();
 
   describe('Scenario 1: Login with valid credentials', () => {
     const it = sagaHelper(authorize({ payload: validCredentials }));
@@ -34,6 +35,10 @@ describe('`authorize` Saga test', () => {
 
     it('store jwt token in localStorage', (result) => {
       expect(result).toEqual(call(Api.storeItems, { jwt: token }));
+    });
+
+    it('redirects to Home', (result) => {
+      expect(result).toEqual(call(startApp));
     });
 
     it('end.', (result) => {
@@ -82,6 +87,7 @@ describe('`register` Saga test', () => {
     const validCredentials = { email: 'john01@example.com', password: '123456' };
     const token = 'testJWT';
     const it = sagaHelper(register({ payload: validCredentials }));
+    const startApp = jest.fn();
 
     it('start submit SignupForm', (result) => {
       expect(result).toEqual(put(startSubmit('SignupForm')));
@@ -102,6 +108,10 @@ describe('`register` Saga test', () => {
 
     it('store jwt token in localStorage', (result) => {
       expect(result).toEqual(call(Api.storeItems, { jwt: token }));
+    });
+
+    it('redirects to Home', (result) => {
+      expect(result).toEqual(call(startApp));
     });
 
     it('end.', (result) => {

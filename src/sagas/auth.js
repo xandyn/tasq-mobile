@@ -8,7 +8,7 @@ import { tasksClear } from '../actions/tasks';
 import { usersClear } from '../actions/users';
 import { uiClear } from '../actions/ui';
 import Api, { login, signup } from '../api';
-import { startApp } from '../App';
+import { startApp, startLogin } from '../App';
 
 
 export function* authorize({ payload }) {
@@ -29,6 +29,7 @@ export function* authorize({ payload }) {
 }
 
 function* logout() {
+  yield call(startLogin);
   yield call(Api.clearItems, ['jwt', 'selectedProjectId']);
   yield [
     put(projectsClear()),
