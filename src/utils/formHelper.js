@@ -44,6 +44,7 @@ export const renderField = ({
         onChangeText={e => onChange(e)}
         style={styles.input}
         placeholder={placeholder}
+        underlineColorAndroid="transparent"
         {...rest}
       />
     </View>

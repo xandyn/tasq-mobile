@@ -10,6 +10,8 @@ import {
   isRequired,
 } from 'revalidate';
 
+import Button from '../../components/core/Button/Button';
+
 import * as authActions from '../../actions/auth';
 
 import { isValidEmail, hasLengthGreaterOrEqual } from '../../utils/customValidators';
@@ -64,11 +66,11 @@ export default class LoginForm extends Component {
           placeholder="Password"
           label="password"
         />
-        <TouchableOpacity onPress={handleSubmit(this.handleSubmit)}>
-          <View>
-            <Text>login</Text>
+        <Button onPress={handleSubmit(this.handleSubmit)}>
+          <View style={styles.btn}>
+            <Text style={styles.btnText}>LOGIN</Text>
           </View>
-        </TouchableOpacity>
+        </Button>
       </View>
     );
   }

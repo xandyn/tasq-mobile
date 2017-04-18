@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import Projects from '../Projects/Projects';
+
 import * as profileActions from '../../actions/profile';
 import * as projectsActions from '../../actions/projects';
 import * as tasksActions from '../../actions/tasks';
@@ -72,11 +74,10 @@ export default class Home extends Component {
       );
     }
 
+    const { navigator } = this.props;
     return (
       <View style={styles.container}>
-        <Text>
-          Home
-        </Text>
+        <Projects navigator={navigator} />
       </View>
     );
   }
