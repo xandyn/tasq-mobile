@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { getSelectedProjectId } from './projects';
+import { getProjectId } from './projects';
 
 
 export const getTasksIds = state => state.tasks.allIds;
@@ -12,7 +12,7 @@ export const getTasksAll = createSelector(
 );
 
 export const getProjectTasksIds = createSelector(
-  [getTasksIds, getTasksMap, getSelectedProjectId],
+  [getTasksIds, getTasksMap, getProjectId],
   (ids, map, id) => ids.filter(item => map.get(item.toString()).get('project') === +id)
 );
 
@@ -22,7 +22,7 @@ export const getProjectTasks = createSelector(
 );
 
 export const getProjectTasksIdsUncompleted = createSelector(
-  [getTasksIds, getTasksMap, getSelectedProjectId],
+  [getTasksIds, getTasksMap, getProjectId],
   (ids, map, id) => ids.filter((item) => {
     const task = map.get(item.toString());
     return task.get('project') === +id && task.get('is_completed') === false;
@@ -30,7 +30,7 @@ export const getProjectTasksIdsUncompleted = createSelector(
 );
 
 export const getProjectTasksIdsCompleted = createSelector(
-  [getTasksIds, getTasksMap, getSelectedProjectId],
+  [getTasksIds, getTasksMap, getProjectId],
   (ids, map, id) => ids.filter((item) => {
     const task = map.get(item.toString());
     return task.get('project') === +id && task.get('is_completed') === true;

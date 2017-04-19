@@ -1,41 +1,41 @@
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+
 
 const replaceSuffixPattern = /--(active|big|small|very-big)/g;
 const icons = {
   'ios-person': [30, '#000000'],
   'ios-person--big': [50, '#bbb'],
-
-  'ios-person--active': [30, '#fff'],
-  'ios-person--active--big': [50, '#fff'],
-  'ios-person--active--very-big': [100, '#fff'],
-
   'ios-search': [30, '#000000'],
   'ios-search--big': [50, '#bbb'],
+  'ios-people': [30, '#000000'],
+  'ios-checkmark': [30, '#000000'],
+  'ios-checkmark--big': [50, '#000000'],
 
-  'ios-search--active': [30, '#fff'],
-  'ios-search--active--big': [50, '#fff'],
-  'ios-search--active--very-big': [100, '#fff'],
+  // SimpleLineIcons
+  'user': [20, '#000000', SimpleLineIcons],
+  'user--big': [30, '#bbb', SimpleLineIcons],
 
-  'ios-people': [30, '#7CBB00'],
-  'ios-people--active': [30, '#FF6D27'],
+  'magnifier': [20, '#000000', SimpleLineIcons],
+  'magnifier--big': [50, '#bbb', SimpleLineIcons],
 
-  'ios-keypad': [30, '#bbb'],
-  'ios-keypad--active': [30, '#fff'],
-
-  'ios-chatbubbles': [30, '#bbb'],
-  'ios-chatbubbles--active': [30, '#fff']
+  'pencil': [20, '#000000', SimpleLineIcons],
+  'pencil--big': [50, '#bbb', SimpleLineIcons],
 };
 
+const defaultIconProvider = Ionicons;
 const iconsMap = {};
 const iconsLoaded = new Promise((resolve) => {
   new Promise.all(
-    Object.keys(icons).map(iconName =>
+    Object.keys(icons).map(iconName => {
       // IconName--suffix--other-suffix is just the mapping name in iconsMap
-      Ionicons.getImageSource(
+      const Provider = icons[iconName][2] || defaultIconProvider; // Ionicons
+      return Provider.getImageSource(
         iconName.replace(replaceSuffixPattern, ''),
         icons[iconName][0],
         icons[iconName][1]
-      ))
+      )
+    })
   ).then((sources) => {
     Object.keys(icons)
       .forEach((iconName, idx) => (iconsMap[iconName] = sources[idx]));

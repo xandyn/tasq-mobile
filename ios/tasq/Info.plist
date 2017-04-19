@@ -4,6 +4,8 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Entypo.ttf</string>
+		<string>SimpleLineIcons.ttf</string>
 		<string>Lato-300.ttf</string>
 		<string>Lato-100.ttf</string>
 		<string>Lato-regular.ttf</string>

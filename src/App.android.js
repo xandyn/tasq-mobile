@@ -5,7 +5,7 @@ import { AsyncStorage } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
 import { registerScreens } from './screens';
-import { iconsMap, iconsLoaded } from './utils/AppIcons';
+import { iconsMap } from './utils/AppIcons';
 import configureStore from './store/configureStore';
 
 const store = configureStore();
@@ -51,12 +51,10 @@ export const startLogin = () => {
 };
 
 
-iconsLoaded.then(() => {
-  AsyncStorage.getItem('jwt').then(jwt => {
-    if (jwt) {
-      startApp();
-    } else {
-      startLogin();
-    }
-  });
+AsyncStorage.getItem('jwt').then(jwt => {
+  if (jwt) {
+    startApp();
+  } else {
+    startLogin();
+  }
 });

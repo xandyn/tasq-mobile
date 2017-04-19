@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ImmutableListView from 'react-native-immutable-list-view';
 
-import ProjectsItem from '../ProjectsItem/ProjectsItem';
+import ProjectItem from '../ProjectItem/ProjectItem';
 
 import { getProjectsIds } from '../../selectors/projects';
 
@@ -24,21 +24,10 @@ export default class Projects extends React.Component {
     navigator: PropTypes.object.isRequired,
   };
 
-  onClickProject = (item) => (e) => {
-    this.props.navigator.push({
-      screen: 'tasq.Tasks',
-      title: item.get('name'),
-      passProps: {
-        id: item.get('id')
-      },
-      backButtonTitle: '',
-    })
-  };
-
   renderRow = (rowData) => {
-    return <ProjectsItem
+    return <ProjectItem
       id={rowData.toString()}
-      onClickProject={this.onClickProject}
+      navigator={this.props.navigator}
     />;
   };
 

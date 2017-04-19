@@ -28,7 +28,7 @@ import styles from './HomeStyles';
 )
 export default class Home extends Component {
   static navigatorStyle = {
-    navBarHidden: true,
+    // navBarHidden: true,
   };
 
   static propTypes = {
@@ -50,6 +50,7 @@ export default class Home extends Component {
   }
 
   componentWillReceiveProps(props) {
+    /*
     const { isProfileFetching, isProjectsFetching, isTasksFetching, isProfileFilled } = props;
     const isFetching = isProfileFetching || isProjectsFetching || isTasksFetching;
 
@@ -59,6 +60,7 @@ export default class Home extends Component {
         animated: true
       });
     }
+    */
   }
 
   render() {

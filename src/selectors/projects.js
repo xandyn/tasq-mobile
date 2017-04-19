@@ -4,11 +4,11 @@ import { createSelector } from 'reselect';
 export const getProjectsIds = state => state.projects.allIds;
 export const getProjectsMap = state => state.projects.byId;
 
-export const getSelectedProjectId = state => state.ui.selectedProjectId;
+export const getProjectId = state => state.projectId;
 
 
-export const getSelectedProject = createSelector(
-  [getSelectedProjectId, getProjectsMap],
+export const getProjectById = createSelector(
+  [getProjectId, getProjectsMap],
   (id, map) => map.get(id.toString())
 );
 

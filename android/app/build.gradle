@@ -66,7 +66,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.vectoricons = [
-        iconFontNames: [ 'Ionicons.ttf', 'MaterialIcons.ttf', 'EvilIcons.ttf' ]
+        iconFontNames: [ 'Entypo.ttf', 'SimpleLineIcons.ttf', 'Ionicons.ttf', 'MaterialIcons.ttf', 'EvilIcons.ttf' ]
 ]
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
