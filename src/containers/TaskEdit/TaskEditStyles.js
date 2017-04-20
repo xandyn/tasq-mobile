@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native';
+import BaseStyles from '../../styles/Base';
 
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
+    ...BaseStyles.container,
     width: '100%',
   },
 });

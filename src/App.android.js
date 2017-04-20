@@ -21,8 +21,9 @@ export const startApp = () => {
         leftButtons: [
           {
             title: 'Profile',
-            id: 'profile',
-            icon: iconsMap['ios-person']
+            id: 'sideMenu',
+            icon: iconsMap['ios-person'],
+            buttonColor: 'white',
           }
         ],
         rightButtons: [
@@ -34,7 +35,22 @@ export const startApp = () => {
         ]
       }
     },
-    animationType: 'fade'
+    animationType: 'fade',
+    drawer: {
+      left: {
+        screen: 'tasq.SideMenu'
+      }
+    },
+    appStyle: {
+      navBarNoBorder: true,
+      topBarElevationShadowEnabled: false,
+      navBarBackgroundColor: '#568D8A',
+      statusBarColor: '#568D8A',
+      navBarTextColor: 'white',
+      navBarButtonColor: 'white',
+      navBarTextFontFamily: 'Lato',
+      statusBarTextColorScheme: 'light',
+    },
   });
 };
 

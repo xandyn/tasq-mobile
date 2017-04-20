@@ -17,9 +17,7 @@ import styles from './TaskEditStyles';
   }),
 )
 export default class TaskEdit extends React.Component {
-  static navigatorStyle = {
-    navBarTextFontFamily: 'Lato'
-  };
+  static navigatorStyle = {};
 
   static navigatorButtons = {
     rightButtons: [{

@@ -4,23 +4,23 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 const replaceSuffixPattern = /--(active|big|small|very-big)/g;
 const icons = {
-  'ios-person': [30, '#000000'],
-  'ios-person--big': [50, '#bbb'],
-  'ios-search': [30, '#000000'],
-  'ios-search--big': [50, '#bbb'],
-  'ios-people': [30, '#000000'],
-  'ios-checkmark': [30, '#000000'],
-  'ios-checkmark--big': [50, '#000000'],
+  'ios-person': [30, '#fff'],
+  'ios-person--big': [50, '#fff'],
+  'ios-search': [30, '#fff'],
+  'ios-search--big': [50, '#fff'],
+  'ios-people': [30, '#fff'],
+  'ios-checkmark': [30, '#fff'],
+  'ios-checkmark--big': [50, '#fff'],
 
   // SimpleLineIcons
-  'user': [20, '#000000', SimpleLineIcons],
-  'user--big': [30, '#bbb', SimpleLineIcons],
+  'user': [20, '#fff', SimpleLineIcons],
+  'user--big': [30, '#fff', SimpleLineIcons],
 
-  'magnifier': [20, '#000000', SimpleLineIcons],
-  'magnifier--big': [50, '#bbb', SimpleLineIcons],
+  'magnifier': [20, '#fff', SimpleLineIcons],
+  'magnifier--big': [50, '#fff', SimpleLineIcons],
 
-  'pencil': [20, '#000000', SimpleLineIcons],
-  'pencil--big': [50, '#bbb', SimpleLineIcons],
+  'pencil': [20, '#fff', SimpleLineIcons],
+  'pencil--big': [50, '#fff', SimpleLineIcons],
 };
 
 const defaultIconProvider = Ionicons;

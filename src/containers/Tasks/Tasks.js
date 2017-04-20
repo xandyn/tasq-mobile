@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ImmutableListView from 'react-native-immutable-list-view';
 
+import Button from '../../components/core/Button/Button';
 import TaskItem from '../TaskItem/TaskItem';
 
 import { getProjectTasksIdsCompleted, getProjectTasksIdsUncompleted } from '../../selectors/tasks';
@@ -21,9 +22,7 @@ import styles from './TasksStyles';
   }),
 )
 export default class Tasks extends React.Component {
-  static navigatorStyle = {
-    navBarTextFontFamily: 'Lato'
-  };
+  static navigatorStyle = {};
 
   static navigatorButtons = {
     rightButtons: [{
@@ -39,6 +38,27 @@ export default class Tasks extends React.Component {
     navigator: PropTypes.object.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showCompletedTasks: false
+    };
+
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+  }
+
+  onNavigatorEvent = (event) => {
+    const { projectId, navigator } = this.props;
+    if (event.id === 'editProject') {
+      navigator.push({
+        screen: 'tasq.ProjectEdit',
+        passProps: { id: projectId },
+        backButtonTitle: '',
+      })
+    }
+  };
+
   renderRow = (rowData) => {
     return <TaskItem
       id={rowData.toString()}
@@ -46,14 +66,38 @@ export default class Tasks extends React.Component {
     />;
   };
 
+  onToggleCompletedTasks = () => {
+    this.setState(prevState => ({
+      showCompletedTasks: !prevState.showCompletedTasks
+    }));
+  };
+
   render() {
     const { tasksIdsCompleted, tasksIdsUncompleted } = this.props;
+    const { showCompletedTasks } = this.state;
     return (
       <View style={styles.container}>
         <ImmutableListView
+          style={styles.tasksUncompleted}
           immutableData={tasksIdsUncompleted}
           renderRow={this.renderRow}
         />
+        {tasksIdsCompleted.count() > 0 &&
+          <Button onPress={this.onToggleCompletedTasks}>
+            <View style={styles.tasksSwitcher}>
+              <Text style={styles.tasksSwitcherText}>
+                {showCompletedTasks ? 'HIDE' : 'SHOW'} COMPLETED TASKS
+              </Text>
+            </View>
+          </Button>
+        }
+        {showCompletedTasks &&
+          <ImmutableListView
+            style={styles.tasksCompleted}
+            immutableData={tasksIdsCompleted}
+            renderRow={this.renderRow}
+          />
+        }
       </View>
     );
   }

@@ -34,7 +34,17 @@ export const startApp = () => {
         ]
       }
     },
-    animationType: 'fade'
+    animationType: 'fade',
+    appStyle: {
+      navBarNoBorder: true,
+      topBarElevationShadowEnabled: false,
+      navBarBackgroundColor: '#568D8A',
+      statusBarColor: '#568D8A',
+      navBarTextColor: 'white',
+      navBarButtonColor: 'white',
+      navBarTextFontFamily: 'Lato',
+      statusBarTextColorScheme: 'light',
+    },
   });
 };
 

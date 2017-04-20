@@ -17,9 +17,7 @@ import styles from './ProjectEditStyles';
   }),
 )
 export default class ProjectEdit extends React.Component {
-  static navigatorStyle = {
-    navBarTextFontFamily: 'Lato'
-  };
+  static navigatorStyle = {};
 
   static navigatorButtons = {
     rightButtons: [{

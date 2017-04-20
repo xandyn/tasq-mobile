@@ -34,25 +34,6 @@ export default class TaskItem extends React.Component {
     navigator: PropTypes.object.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
-  }
-
-  onNavigatorEvent = (event) => {
-    const { item, navigator } = this.props;
-    if (event.id === 'editProject') {
-      navigator.push({
-        screen: 'tasq.ProjectEdit',
-        passProps: {
-          id: item.get('project').toString()
-        },
-        backButtonTitle: '',
-      })
-    }
-  };
-
   onClickTask = (e) => {
     const { id, navigator } = this.props;
     navigator.push({

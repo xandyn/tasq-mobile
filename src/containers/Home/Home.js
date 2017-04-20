@@ -28,7 +28,14 @@ import styles from './HomeStyles';
 )
 export default class Home extends Component {
   static navigatorStyle = {
-    // navBarHidden: true,
+    navBarNoBorder: true,
+    topBarElevationShadowEnabled: false,
+    navBarBackgroundColor: '#568D8A',
+    statusBarColor: '#568D8A',
+    navBarTextColor: 'white',
+    navBarButtonColor: 'white',
+    navBarTextFontFamily: 'Lato',
+    statusBarTextColorScheme: 'light',
   };
 
   static propTypes = {
