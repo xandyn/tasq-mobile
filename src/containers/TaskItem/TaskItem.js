@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import moment from 'moment';
 
-import Button from '../../components/core/Button/Button';
+import InteractableRow from '../../components/InteractableRow/InteractableRow';
 
 import { getTasksMap } from '../../selectors/tasks';
 import { getUserById } from '../../selectors/users';
@@ -40,19 +41,49 @@ export default class TaskItem extends React.Component {
       screen: 'tasq.TaskEdit',
       passProps: { id },
       backButtonTitle: '',
-    })
+    });
+  };
+
+  onButtonPress = (name) => (e) => {
+    alert(`Button ${name} pressed`);
   };
 
   render() {
     const { item } = this.props;
+
+    const isCompleted = item.get('is_completed');
+    const completionDate = item.get('completion_date');
+    const overdue = moment().isAfter(completionDate);
+    const calendarFormats = {
+      sameDay: '[Today at] HH:mm',
+      nextDay: '[Tomorrow at] HH:mm',
+      lastDay: '[Yesterday at] HH:mm',
+      nextWeek: 'ddd, D MMM',
+      lastWeek: 'ddd, D MMM',
+      sameElse: 'ddd, D MMM'
+    };
     return (
-      <Button onPress={this.onClickTask}>
-        <View style={styles.container}>
-          <Text style={styles.name} ellipsizeMode="tail" numberOfLines={1}>
-            {item.get('text')}
-          </Text>
-        </View>
-      </Button>
+      <InteractableRow style={styles.container} onButtonPress={this.onButtonPress}>
+        <TouchableWithoutFeedback onPress={this.onClickTask}>
+          <View style={styles.taskContent}>
+            <View>
+              <Text
+                style={isCompleted ? styles.taskTextCompleted : styles.taskText}
+                ellipsizeMode="tail"
+                numberOfLines={1}
+              >
+                {item.get('text')}
+              </Text>
+              {completionDate &&
+                <Text style={overdue ? styles.taskOverdue : styles.taskDue}>
+                  {moment(completionDate).calendar(null, calendarFormats)}
+                  {!moment().isSame(completionDate, 'year') && moment(completionDate).format(' YYYY')}
+                </Text>
+              }
+            </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </InteractableRow>
     );
   }
 }

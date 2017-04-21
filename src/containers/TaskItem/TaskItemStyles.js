@@ -1,28 +1,54 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+const Screen = Dimensions.get('window');
 
 
 export default StyleSheet.create({
   container: {
     flex: 1,
+  },
+  taskContent: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: 15,
-    paddingBottom: 15,
-    paddingRight: 10,
-    paddingLeft: 10,
+    borderBottomWidth: 1,
+    borderColor: '#eeeeee',
+    left: 0,
+    right: 0,
+    height: 60,
+    backgroundColor: 'white',
   },
-  icon: {
-    height: 27,
-    width: 40,
-    textAlign: 'center',
-    color: '#ACAEB2',
-    paddingRight: 10,
+  taskAssignee: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#73d4e3',
+    margin: 20
   },
-  name: {
-    paddingRight: 10,
-    fontSize: 18,
+  taskText: {
     fontFamily: 'Lato',
+    fontSize: 20,
     color: '#3B3B3B',
     flexShrink: 1,
+    marginHorizontal: 20,
+  },
+  taskTextCompleted: {
+    fontFamily: 'Lato',
+    fontSize: 20,
+    color: '#8C8E90',
+    flexShrink: 1,
+    marginHorizontal: 20,
+    textDecorationLine: 'line-through'
+  },
+  taskDue: {
+    fontFamily: 'Lato',
+    fontSize: 13,
+    color: '#8C8E90',
+    marginHorizontal: 20,
+  },
+  taskOverdue: {
+    fontFamily: 'Lato',
+    fontSize: 13,
+    color: '#ff2060',
+    marginHorizontal: 20,
   },
 });

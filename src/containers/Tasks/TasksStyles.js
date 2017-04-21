@@ -18,6 +18,7 @@ export default StyleSheet.create({
   },
   tasksSwitcherText: {
     ...BaseStyles.text,
+    color: 'white',
     fontSize: 13,
   },
   tasksUncompleted: {

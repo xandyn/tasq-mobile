@@ -22,7 +22,9 @@ import styles from './TasksStyles';
   }),
 )
 export default class Tasks extends React.Component {
-  static navigatorStyle = {};
+  static navigatorStyle = {
+    navBarTextFontFamily: 'Lato',
+  };
 
   static navigatorButtons = {
     rightButtons: [{
@@ -55,8 +57,14 @@ export default class Tasks extends React.Component {
         screen: 'tasq.ProjectEdit',
         passProps: { id: projectId },
         backButtonTitle: '',
-      })
+      });
     }
+  };
+
+  onToggleCompletedTasks = () => {
+    this.setState(prevState => ({
+      showCompletedTasks: !prevState.showCompletedTasks
+    }));
   };
 
   renderRow = (rowData) => {
@@ -64,12 +72,6 @@ export default class Tasks extends React.Component {
       id={rowData.toString()}
       navigator={this.props.navigator}
     />;
-  };
-
-  onToggleCompletedTasks = () => {
-    this.setState(prevState => ({
-      showCompletedTasks: !prevState.showCompletedTasks
-    }));
   };
 
   render() {

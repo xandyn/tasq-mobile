@@ -11,8 +11,8 @@ const BaseStyles = {
     borderRadius: 3,
   },
   text: {
-    color: 'white',
-    fontFamily: 'Lato'
+    color: '#3B3B3B',
+    fontFamily: 'Lato',
   },
 };
 
