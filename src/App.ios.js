@@ -1,10 +1,9 @@
 import 'whatwg-fetch';
 
-import React from 'react';
 import { AsyncStorage } from 'react-native';
 import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
-import { registerScreens } from './screens';
+import registerScreens from './screens';
 import { iconsMap } from './utils/AppIcons';
 import configureStore from './store/configureStore';
 
@@ -61,7 +60,7 @@ export const startLogin = () => {
 };
 
 
-AsyncStorage.getItem('jwt').then(jwt => {
+AsyncStorage.getItem('jwt').then((jwt) => {
   if (jwt) {
     startApp();
   } else {

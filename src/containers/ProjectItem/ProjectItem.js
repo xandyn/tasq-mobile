@@ -22,11 +22,10 @@ export default class ProjectItem extends React.Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     item: ImmutablePropTypes.map.isRequired,
-    onClickProject: PropTypes.func.isRequired,
     navigator: PropTypes.object.isRequired,
   };
 
-  onClickProject = (e) => {
+  onClickProject = () => {
     const { id, item, navigator } = this.props;
     navigator.push({
       screen: 'tasq.Tasks',
@@ -35,11 +34,11 @@ export default class ProjectItem extends React.Component {
         projectId: id
       },
       backButtonTitle: '',
-    })
+    });
   };
 
   render() {
-    const { id, item } = this.props;
+    const { item } = this.props;
     const isShared = item.get('is_shared');
     return (
       <Button onPress={this.onClickProject}>

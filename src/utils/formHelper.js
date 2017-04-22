@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 });
 
 
-/* eslint-disable react/prop-types */
+/* eslint-disable react/prop-types, import/prefer-default-export */
 export const renderField = ({
   input: { value, onChange },
   meta: { touched, error },
@@ -50,6 +50,4 @@ export const renderField = ({
     </View>
   </View>
 );
-/* eslint-enable react/prop-types */
-
-
+/* eslint-enable react/prop-types, import/prefer-default-export */

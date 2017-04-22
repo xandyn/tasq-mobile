@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { TouchableNativeFeedback } from 'react-native';
 
 
@@ -11,6 +12,11 @@ const Button = ({ children, ...props }) => (
     {children}
   </TouchableNativeFeedback>
 );
+
+
+Button.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 
 export default Button;

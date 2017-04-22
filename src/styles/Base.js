@@ -1,5 +1,3 @@
-import { StyleSheet, Dimensions, Platform } from 'react-native';
-
 
 const BaseStyles = {
   container: {

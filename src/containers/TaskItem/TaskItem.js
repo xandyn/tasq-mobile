@@ -15,15 +15,13 @@ import styles from './TaskItemStyles';
 
 
 @connect(
-  (_, { id, project }) => {
-    return ({ projects, tasks, users }) => {
-      const task = getTasksMap({ tasks }).get(id);
-      const assignedToUserId = task.get('assigned_to_user');
-      return {
-        project: project || projects.byId.get(task.get('project').toString()),
-        item: task,
-        assignedToUser: assignedToUserId ? getUserById({ users, userId: assignedToUserId }) : null,
-      };
+  (_, { id, project }) => ({ projects, tasks, users }) => {
+    const task = getTasksMap({ tasks }).get(id);
+    const assignedToUserId = task.get('assigned_to_user');
+    return {
+      project: project || projects.byId.get(task.get('project').toString()),
+      item: task,
+      assignedToUser: assignedToUserId ? getUserById({ users, userId: assignedToUserId }) : null,
     };
   },
 )
@@ -31,11 +29,10 @@ export default class TaskItem extends React.Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     item: ImmutablePropTypes.map.isRequired,
-    onClickTask: PropTypes.func.isRequired,
     navigator: PropTypes.object.isRequired,
   };
 
-  onClickTask = (e) => {
+  onClickTask = () => {
     const { id, navigator } = this.props;
     navigator.push({
       screen: 'tasq.TaskEdit',
@@ -44,8 +41,7 @@ export default class TaskItem extends React.Component {
     });
   };
 
-  onButtonPress = (name) => (e) => {
-    alert(`Button ${name} pressed`);
+  onButtonPress = name => () => {
   };
 
   render() {

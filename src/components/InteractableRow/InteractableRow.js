@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Animated } from 'react-native';
+import { View, TouchableOpacity, Animated } from 'react-native';
 import Interactable from 'react-native-interactable';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -9,7 +9,7 @@ import styles from './InteractableRowStyles';
 
 export default class InteractableRow extends React.Component {
   static defaultProps = {
-    damping: 1-0.7,
+    damping: 0.7,
     tension: 300,
   };
 
@@ -23,18 +23,18 @@ export default class InteractableRow extends React.Component {
   constructor(props) {
     super(props);
 
-    this._deltaX = new Animated.Value(0);
+    this.deltaX = new Animated.Value(0);
   }
 
   render() {
     const { damping, tension, onButtonPress, children, ...props } = this.props;
     return (
       <View {...props}>
-        <View style={styles.mainHolder} pointerEvents='box-none'>
-          <Animated.View style={
-            [styles.trashHolder, {
+        <View style={styles.mainHolder} pointerEvents="box-none">
+          <Animated.View
+            style={[styles.trashHolder, {
               transform: [{
-                translateX: this._deltaX.interpolate({
+                translateX: this.deltaX.interpolate({
                   inputRange: [-75, 0],
                   outputRange: [0, 75]
                 })
@@ -47,11 +47,11 @@ export default class InteractableRow extends React.Component {
           </Animated.View>
         </View>
 
-        <View style={styles.mainHolder} pointerEvents='box-none'>
-          <Animated.View style={
-            [styles.doneHolder, {
+        <View style={styles.mainHolder} pointerEvents="box-none">
+          <Animated.View
+            style={[styles.doneHolder, {
               transform: [{
-                translateX: this._deltaX.interpolate({
+                translateX: this.deltaX.interpolate({
                   inputRange: [0, 75],
                   outputRange: [-75, 0]
                 })
@@ -65,13 +65,13 @@ export default class InteractableRow extends React.Component {
         </View>
 
         <Interactable.View
-          horizontalOnly={true}
+          horizontalOnly
           snapPoints={[
-            {x: 75,  damping: 1-damping, tension},
-            {x: 0,   damping: 1-damping, tension},
-            {x: -75, damping: 1-damping, tension}
+            { x: 75, damping, tension },
+            { x: 0, damping, tension },
+            { x: -75, damping, tension }
           ]}
-          animatedValueX={this._deltaX}
+          animatedValueX={this.deltaX}
         >
           {children}
         </Interactable.View>

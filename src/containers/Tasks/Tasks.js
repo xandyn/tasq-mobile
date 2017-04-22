@@ -30,13 +30,14 @@ export default class Tasks extends React.Component {
     rightButtons: [{
       title: 'Edit',
       id: 'editProject',
-      icon: iconsMap['pencil']
+      icon: iconsMap.pencil
     }]
   };
 
   static propTypes = {
     tasksIdsCompleted: ImmutablePropTypes.list.isRequired,
     tasksIdsUncompleted: ImmutablePropTypes.list.isRequired,
+    projectId: PropTypes.string.isRequired,
     navigator: PropTypes.object.isRequired,
   };
 
@@ -68,10 +69,13 @@ export default class Tasks extends React.Component {
   };
 
   renderRow = (rowData) => {
-    return <TaskItem
-      id={rowData.toString()}
-      navigator={this.props.navigator}
-    />;
+    const { navigator } = this.props;
+    return (
+      <TaskItem
+        id={rowData.toString()}
+        navigator={navigator}
+      />
+    );
   };
 
   render() {

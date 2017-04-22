@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -68,7 +68,7 @@ export default class LoginForm extends Component {
         />
         <Button onPress={handleSubmit(this.handleSubmit)}>
           <View style={styles.btn}>
-            <Text style={styles.btnText}>LOGIN</Text>
+            <Text style={styles.btnText}>LOGIN{submitting ? '...' : ''}</Text>
           </View>
         </Button>
       </View>

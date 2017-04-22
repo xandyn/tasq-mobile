@@ -5,7 +5,7 @@ import config from '../config';
 export default class Api {
 
   static getHeaders() {
-    return AsyncStorage.getItem('jwt').then(jwt => {
+    return AsyncStorage.getItem('jwt').then((jwt) => {
       const headers = {
         Accept: 'application/json',
         'Content-Type': 'application/json'
@@ -16,7 +16,7 @@ export default class Api {
       }
 
       return headers;
-    })
+    });
   }
 
   static async fetch(url, method, payload) {

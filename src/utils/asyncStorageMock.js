@@ -1,3 +1,4 @@
+/* eslint-disable */
 class MockStorage {
   constructor(cache = {}) {
     this.storageCache = cache;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -20,7 +20,7 @@ import styles from './HomeStyles';
     isProjectsFetching: projects.meta.get('fetching'),
     isTasksFetching: tasks.meta.get('fetching')
   }),
-  (dispatch) => bindActionCreators({
+  dispatch => bindActionCreators({
     ...profileActions,
     ...projectsActions,
     ...tasksActions,
@@ -42,6 +42,7 @@ export default class Home extends Component {
     profileFetch: PropTypes.func.isRequired,
     projectsFetch: PropTypes.func.isRequired,
     tasksFetch: PropTypes.func.isRequired,
+    navigator: PropTypes.object.isRequired,
     isProfileFilled: PropTypes.bool.isRequired,
     isProfileFetching: PropTypes.bool.isRequired,
     isProjectsFetching: PropTypes.bool.isRequired,
@@ -54,20 +55,6 @@ export default class Home extends Component {
     profileFetch();
     projectsFetch();
     tasksFetch();
-  }
-
-  componentWillReceiveProps(props) {
-    /*
-    const { isProfileFetching, isProjectsFetching, isTasksFetching, isProfileFilled } = props;
-    const isFetching = isProfileFetching || isProjectsFetching || isTasksFetching;
-
-    if (!isFetching && isProfileFilled) {
-      this.props.navigator.toggleNavBar({
-        to: 'shown',
-        animated: true
-      });
-    }
-    */
   }
 
   render() {

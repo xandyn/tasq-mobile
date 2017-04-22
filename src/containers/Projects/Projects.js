@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
@@ -14,7 +14,7 @@ import styles from './ProjectsStyles';
 
 
 @connect(
-  ({ projects, ui }) => ({
+  ({ projects }) => ({
     projectsIds: getProjectsIds({ projects }),
   }),
 )
@@ -25,10 +25,13 @@ export default class Projects extends React.Component {
   };
 
   renderRow = (rowData) => {
-    return <ProjectItem
-      id={rowData.toString()}
-      navigator={this.props.navigator}
-    />;
+    const { navigator } = this.props;
+    return (
+      <ProjectItem
+        id={rowData.toString()}
+        navigator={navigator}
+      />
+    );
   };
 
   render() {

@@ -8,7 +8,7 @@ import TaskEdit from './containers/TaskEdit/TaskEdit';
 import ProjectEdit from './containers/ProjectEdit/ProjectEdit';
 
 
-export function registerScreens(store, Provider) {
+export default function registerScreens(store, Provider) {
   Navigation.registerComponent('tasq.Login', () => Login, store, Provider);
   Navigation.registerComponent('tasq.Home', () => Home, store, Provider);
   Navigation.registerComponent('tasq.SideMenu', () => SideMenu, store, Provider);

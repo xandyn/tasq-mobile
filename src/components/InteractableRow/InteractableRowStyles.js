@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
+
+
 const Screen = Dimensions.get('window');
-
-
 export default StyleSheet.create({
   button: {
     width: 75,

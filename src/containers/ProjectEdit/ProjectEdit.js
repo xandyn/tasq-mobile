@@ -28,7 +28,7 @@ export default class ProjectEdit extends React.Component {
   };
 
   static propTypes = {
-
+    item: ImmutablePropTypes.map.isRequired,
   };
 
   render() {
