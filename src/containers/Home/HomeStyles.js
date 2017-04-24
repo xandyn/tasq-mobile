@@ -5,6 +5,7 @@ import BaseStyles from '../../styles/Base';
 export default StyleSheet.create({
   container: {
     ...BaseStyles.container,
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },

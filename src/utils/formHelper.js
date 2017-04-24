@@ -1,23 +1,16 @@
 import React from 'react';
-import { View, TextInput, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, TextInput, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import BaseStyles from '../styles/Base';
 
 
-const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
-  input: {
-    fontFamily: 'Lato',
-    height: 40,
-    width: width * 0.7,
-    marginLeft: 10
-  },
   error: {
-    fontFamily: 'Lato',
-    color: 'red'
+    ...BaseStyles.label,
+    color: '#ff2060',
   },
   label: {
-    fontFamily: 'Lato',
-    color: 'black'
+    ...BaseStyles.label,
   },
   formGroup: {
     flexDirection: 'row',
@@ -41,8 +34,7 @@ export const renderField = ({
       {icon && <Icon name={icon} size={30} />}
       <TextInput
         value={value}
-        onChangeText={e => onChange(e)}
-        style={styles.input}
+        onChangeText={v => onChange(v)}
         placeholder={placeholder}
         underlineColorAndroid="transparent"
         {...rest}

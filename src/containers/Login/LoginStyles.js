@@ -9,6 +9,12 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  input: {
+    ...BaseStyles.input,
+    width: width * 0.7,
+    height: 40,
+    marginBottom: 10,
+  },
   btn: {
     ...BaseStyles.btn,
     alignItems: 'center',

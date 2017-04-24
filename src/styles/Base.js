@@ -12,6 +12,16 @@ const BaseStyles = {
     color: '#3B3B3B',
     fontFamily: 'Lato',
   },
+  label: {
+    color: '#747474',
+    fontFamily: 'Lato',
+    fontSize: 12,
+  },
+  input: {
+    color: '#3B3B3B',
+    fontFamily: 'Lato',
+    fontSize: 18,
+  },
 };
 
 export default { ...BaseStyles };

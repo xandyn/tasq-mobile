@@ -10,13 +10,15 @@ import Button from '../../components/core/Button/Button';
 import TaskItem from '../TaskItem/TaskItem';
 
 import { getProjectTasksIdsCompleted, getProjectTasksIdsUncompleted } from '../../selectors/tasks';
+import { getProjectsMap } from '../../selectors/projects';
 import { iconsMap } from '../../utils/AppIcons';
 
 import styles from './TasksStyles';
 
 
 @connect(
-  (_, { projectId }) => ({ tasks }) => ({
+  (_, { projectId }) => ({ tasks, projects, }) => ({
+    project: getProjectsMap({ projects }).get(projectId),
     tasksIdsCompleted: getProjectTasksIdsCompleted({ tasks, projectId }),
     tasksIdsUncompleted: getProjectTasksIdsUncompleted({ tasks, projectId }),
   }),
@@ -35,6 +37,7 @@ export default class Tasks extends React.Component {
   };
 
   static propTypes = {
+    project: ImmutablePropTypes.map.isRequired,
     tasksIdsCompleted: ImmutablePropTypes.list.isRequired,
     tasksIdsUncompleted: ImmutablePropTypes.list.isRequired,
     projectId: PropTypes.string.isRequired,
@@ -52,9 +55,15 @@ export default class Tasks extends React.Component {
   }
 
   onNavigatorEvent = (event) => {
-    const { projectId, navigator } = this.props;
+    const { projectId, project, navigator } = this.props;
+    if (event.id === 'willAppear') {
+      navigator.setTitle({
+        title: project.get('name')
+      });
+    }
     if (event.id === 'editProject') {
       navigator.push({
+        title: 'Edit project',
         screen: 'tasq.ProjectEdit',
         passProps: { id: projectId },
         backButtonTitle: '',

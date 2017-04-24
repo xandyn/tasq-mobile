@@ -51,20 +51,22 @@ export default class LoginForm extends Component {
     return (
       <View style={styles.container}>
         <Field
+          style={styles.input}
           autoCorrect={false}
           autoCapitalize={false}
           name="email"
           keyboardType="email-address"
           component={renderField}
           placeholder="email@example.com"
-          label="email address"
+          label="EMAIL ADDRESS"
         />
         <Field
+          style={styles.input}
           secureTextEntry
           name="password"
           component={renderField}
           placeholder="Password"
-          label="password"
+          label="PASSWORD"
         />
         <Button onPress={handleSubmit(this.handleSubmit)}>
           <View style={styles.btn}>
