@@ -56,18 +56,22 @@ export default class Tasks extends React.Component {
 
   onNavigatorEvent = (event) => {
     const { projectId, project, navigator } = this.props;
-    if (event.id === 'willAppear') {
-      navigator.setTitle({
-        title: project.get('name')
-      });
-    }
-    if (event.id === 'editProject') {
-      navigator.push({
-        title: 'Edit project',
-        screen: 'tasq.ProjectEdit',
-        passProps: { id: projectId },
-        backButtonTitle: '',
-      });
+    switch (event.id) {
+      case 'willAppear':
+        navigator.setTitle({
+          title: project.get('name')
+        });
+        break;
+      case 'editProject':
+        navigator.push({
+          title: 'Edit project',
+          screen: 'tasq.ProjectEdit',
+          passProps: { id: projectId },
+          backButtonTitle: '',
+        });
+        break;
+      default:
+        break;
     }
   };
 

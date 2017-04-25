@@ -28,7 +28,7 @@ export const renderField = ({
 }) => (
   <View>
     <Text style={(touched && error) ? styles.error : styles.label}>
-      {(touched && error) ? error : label}
+      {(touched && error) ? error.toUpperCase() : label.toUpperCase()}
     </Text>
     <View style={styles.formGroup}>
       {icon && <Icon name={icon} size={30} />}

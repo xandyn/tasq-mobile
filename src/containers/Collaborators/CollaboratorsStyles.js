@@ -30,7 +30,7 @@ export default StyleSheet.create({
   input: {
     ...BaseStyles.input,
     height: 55,
-    width: width * 0.85,
+    width: width * 0.65,
   },
   label: {
     ...BaseStyles.label,

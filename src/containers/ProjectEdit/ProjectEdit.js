@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, ScrollView, Text, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+
+import Collaborators from '../Collaborators/Collaborators';
 
 import { getProjectsMap } from '../../selectors/projects';
 import { iconsMap } from '../../utils/AppIcons';
@@ -54,13 +56,16 @@ export default class ProjectEdit extends React.Component {
   onNavigatorEvent = (event) => {
     const { name } = this.state;
     const { id, projectEditRequest } = this.props;
-    if (event.id === 'saveProject') {
-      projectEditRequest(id, { name });
+    switch (event.id) {
+      case 'saveProject':
+        if (name.trim()) projectEditRequest(id, { name });
+        break;
+      default:
+        break;
     }
   };
 
-  onChangeProjectName = (value) => {
-    const name = value.trim();
+  onChangeProjectName = (name) => {
     this.setState({ name });
   };
 
@@ -86,7 +91,11 @@ export default class ProjectEdit extends React.Component {
             underlineColorAndroid="transparent"
           />
         </View>
-        <Text style={styles.label}>PROJECT MEMBERS</Text>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Text style={styles.label}>COLLABORATORS</Text>
+          <Collaborators project={item} />
+          <Text style={styles.label}>SETTINGS</Text>
+        </ScrollView>
       </View>
     );
   }
