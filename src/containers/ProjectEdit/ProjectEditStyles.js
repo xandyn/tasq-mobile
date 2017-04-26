@@ -1,5 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import BaseStyles from '../../styles/Base';
+import Colors from '../../styles/Colors';
 
 
 const { width } = Dimensions.get('window');
@@ -14,7 +15,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     backgroundColor: 'white',
-    shadowColor: '#3b3b3b',
+    shadowColor: Colors.dark,
     shadowOpacity: 0.2,
     shadowRadius: 1,
     shadowOffset: {
@@ -24,7 +25,7 @@ export default StyleSheet.create({
   },
   icon: {
     textAlign: 'center',
-    color: '#ACAEB2',
+    color: Colors.icon,
     paddingHorizontal: 20,
   },
   input: {
@@ -35,7 +36,7 @@ export default StyleSheet.create({
   label: {
     ...BaseStyles.label,
     marginTop: 30,
-    marginBottom: 15,
+    marginBottom: 10,
     marginLeft: 20,
   },
 });

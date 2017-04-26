@@ -29,6 +29,7 @@ CollaboratorsList.propTypes = {
   pendingCollaborators: ImmutablePropTypes.list.isRequired,
   projectCollaborators: ImmutablePropTypes.list.isRequired,
   onDeleteCollaborator: PropTypes.func.isRequired,
+  ownerIsCurrentUser: PropTypes.bool.isRequired,
 };
 
 

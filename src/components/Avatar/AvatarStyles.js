@@ -9,6 +9,6 @@ export default StyleSheet.create({
   },
   text: {
     backgroundColor: 'transparent',
-    color: '#fff',
+    color: 'white',
   }
 });

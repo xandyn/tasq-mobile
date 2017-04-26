@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import Colors from '../../styles/Colors';
 
 
 export default StyleSheet.create({
@@ -13,7 +14,7 @@ export default StyleSheet.create({
   icon: {
     height: 20,
     textAlign: 'center',
-    color: '#ACAEB2',
+    color: Colors.icon,
     paddingLeft: 5,
     paddingRight: 15,
   },
@@ -21,13 +22,13 @@ export default StyleSheet.create({
     paddingRight: 10,
     fontSize: 18,
     fontFamily: 'Lato',
-    color: '#3B3B3B',
+    color: Colors.textPrimary,
     flexShrink: 1,
   },
   notifications: {
     marginLeft: 'auto',
     marginRight: 5,
-    color: '#ACAEB2',
+    color: Colors.textSecondary,
     fontFamily: 'Lato',
   }
 });

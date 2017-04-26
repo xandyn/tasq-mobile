@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import Collaborators from '../Collaborators/Collaborators';
+import ProjectSettings from '../ProjectSettings/ProjectSettings';
 
 import { getProjectsMap } from '../../selectors/projects';
 import { iconsMap } from '../../utils/AppIcons';
@@ -25,7 +26,9 @@ import styles from './ProjectEditStyles';
   }, dispatch)
 )
 export default class ProjectEdit extends React.Component {
-  static navigatorStyle = {};
+  static navigatorStyle = {
+    navBarTitleTextCentered: true,
+  };
 
   static navigatorButtons = {
     rightButtons: [{
@@ -95,6 +98,7 @@ export default class ProjectEdit extends React.Component {
           <Text style={styles.label}>COLLABORATORS</Text>
           <Collaborators project={item} />
           <Text style={styles.label}>SETTINGS</Text>
+          <ProjectSettings />
         </ScrollView>
       </View>
     );

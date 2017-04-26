@@ -26,6 +26,7 @@ import styles from './TasksStyles';
 export default class Tasks extends React.Component {
   static navigatorStyle = {
     navBarTextFontFamily: 'Lato',
+    navBarTitleTextCentered: true,
   };
 
   static navigatorButtons = {

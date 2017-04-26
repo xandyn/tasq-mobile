@@ -5,6 +5,7 @@ import { Navigation } from 'react-native-navigation';
 import { Provider } from 'react-redux';
 import registerScreens from './screens';
 import { iconsMap } from './utils/AppIcons';
+import Colors from './styles/Colors';
 import configureStore from './store/configureStore';
 
 const store = configureStore();
@@ -37,8 +38,8 @@ export const startApp = () => {
     appStyle: {
       navBarNoBorder: true,
       topBarElevationShadowEnabled: false,
-      navBarBackgroundColor: '#568D8A',
-      statusBarColor: '#568D8A',
+      navBarBackgroundColor: Colors.primary,
+      statusBarColor: Colors.primary,
       navBarTextColor: 'white',
       navBarButtonColor: 'white',
       navBarTextFontFamily: 'Lato',

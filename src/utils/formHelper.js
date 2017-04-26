@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Colors from '../styles/Colors';
 import BaseStyles from '../styles/Base';
 
 
 const styles = StyleSheet.create({
   error: {
     ...BaseStyles.label,
-    color: '#ff2060',
+    color: Colors.red,
   },
   label: {
     ...BaseStyles.label,

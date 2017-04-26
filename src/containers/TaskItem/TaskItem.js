@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
 
-import InteractableRow from '../../components/InteractableRow/InteractableRow';
+import TaskIR from '../../components/InteractableRow/TaskIR/TaskIR';
 
 import { getTasksMap } from '../../selectors/tasks';
 import { getUserById } from '../../selectors/users';
@@ -59,7 +59,7 @@ export default class TaskItem extends React.Component {
       sameElse: 'ddd, D MMM'
     };
     return (
-      <InteractableRow style={styles.container} onButtonPress={this.onButtonPress}>
+      <TaskIR style={styles.container} onButtonPress={this.onButtonPress}>
         <TouchableWithoutFeedback onPress={this.onClickTask}>
           <View style={styles.taskContent}>
             <View>
@@ -79,7 +79,7 @@ export default class TaskItem extends React.Component {
             </View>
           </View>
         </TouchableWithoutFeedback>
-      </InteractableRow>
+      </TaskIR>
     );
   }
 }

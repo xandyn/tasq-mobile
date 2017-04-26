@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import Colors from '../../../styles/Colors';
 
 
 const Screen = Dimensions.get('window');
@@ -20,7 +21,7 @@ export default StyleSheet.create({
     left: Screen.width - 75,
     width: Screen.width,
     height: 60,
-    backgroundColor: '#D9853B',
+    backgroundColor: Colors.orange,
     justifyContent: 'center'
   },
   doneHolder: {
@@ -29,7 +30,7 @@ export default StyleSheet.create({
     right: Screen.width - 75,
     width: Screen.width,
     height: 60,
-    backgroundColor: '#2f9a5d',
+    backgroundColor: Colors.green,
     justifyContent: 'center',
     alignItems: 'flex-end',
   },

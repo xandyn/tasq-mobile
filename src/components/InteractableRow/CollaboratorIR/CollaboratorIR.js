@@ -4,7 +4,7 @@ import Interactable from 'react-native-interactable';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import styles from './InteractableRowStyles';
+import styles from './CollaboratorIRStyles';
 
 
 export default class InteractableRow extends React.Component {
@@ -49,7 +49,7 @@ export default class InteractableRow extends React.Component {
 
         <View style={styles.mainHolder} pointerEvents="box-none">
           <Animated.View
-            style={[styles.doneHolder, {
+            style={[styles.flagHolder, {
               transform: [{
                 translateX: this.deltaX.interpolate({
                   inputRange: [0, 75],
@@ -58,8 +58,8 @@ export default class InteractableRow extends React.Component {
               }]
             }]}
           >
-            <TouchableOpacity onPress={onButtonPress('done')}>
-              <Icon name="ios-checkmark" size={50} style={styles.button} />
+            <TouchableOpacity onPress={onButtonPress('promote')}>
+              <Icon name="ios-flag" size={30} style={styles.button} />
             </TouchableOpacity>
           </Animated.View>
         </View>

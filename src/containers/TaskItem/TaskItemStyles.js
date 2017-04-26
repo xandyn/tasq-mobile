@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import Colors from '../../styles/Colors';
 
 
 export default StyleSheet.create({
@@ -9,8 +10,7 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderColor: '#eeeeee',
+    marginBottom: 2,
     left: 0,
     right: 0,
     height: 60,
@@ -20,20 +20,20 @@ export default StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: '#73d4e3',
+    backgroundColor: 'white',
     margin: 20
   },
   taskText: {
     fontFamily: 'Lato',
     fontSize: 20,
-    color: '#3B3B3B',
+    color: Colors.textPrimary,
     flexShrink: 1,
     marginHorizontal: 20,
   },
   taskTextCompleted: {
     fontFamily: 'Lato',
     fontSize: 20,
-    color: '#8C8E90',
+    color: Colors.textSecondary,
     flexShrink: 1,
     marginHorizontal: 20,
     textDecorationLine: 'line-through'
@@ -41,13 +41,15 @@ export default StyleSheet.create({
   taskDue: {
     fontFamily: 'Lato',
     fontSize: 13,
-    color: '#8C8E90',
+    color: Colors.textSecondary,
+    marginTop: 5,
     marginHorizontal: 20,
   },
   taskOverdue: {
     fontFamily: 'Lato',
     fontSize: 13,
-    color: '#ff2060',
+    color: Colors.red,
+    marginTop: 5,
     marginHorizontal: 20,
   },
 });

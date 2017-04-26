@@ -10,6 +10,7 @@ import * as profileActions from '../../actions/profile';
 import * as projectsActions from '../../actions/projects';
 import * as tasksActions from '../../actions/tasks';
 
+import Colors from '../../styles/Colors';
 import styles from './HomeStyles';
 
 
@@ -30,8 +31,8 @@ export default class Home extends Component {
   static navigatorStyle = {
     navBarNoBorder: true,
     topBarElevationShadowEnabled: false,
-    navBarBackgroundColor: '#568D8A',
-    statusBarColor: '#568D8A',
+    navBarBackgroundColor: Colors.primary,
+    statusBarColor: Colors.primary,
     navBarTextColor: 'white',
     navBarButtonColor: 'white',
     navBarTextFontFamily: 'Lato',

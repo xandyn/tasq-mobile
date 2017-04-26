@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import BaseStyles from '../../../styles/Base';
+import Colors from '../../../styles/Colors';
 
 
 export default StyleSheet.create({
@@ -12,8 +13,7 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     backgroundColor: 'white',
     height: 50,
-    borderTopWidth: 1,
-    borderColor: '#eeeeee',
+    marginBottom: 1,
   },
   avatar: {
   },
@@ -34,15 +34,15 @@ export default StyleSheet.create({
     borderWidth: 0.8,
   },
   ownerColor: {
-    borderColor: '#3FA9F5',
-    color: '#3FA9F5',
+    borderColor: Colors.status.owner,
+    color: Colors.status.owner,
   },
   pendingColor: {
-    borderColor: '#E7BB09',
-    color: '#E7BB09',
+    borderColor: Colors.status.pending,
+    color: Colors.status.pending,
   },
   collaboratorColor: {
-    borderColor: '#4DBBBD',
-    color: '#4DBBBD',
+    borderColor: Colors.status.collaborator,
+    color: Colors.status.collaborator,
   },
 });
