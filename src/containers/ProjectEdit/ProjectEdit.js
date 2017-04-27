@@ -12,6 +12,7 @@ import Button from '../../components/core/Button/Button';
 
 import { getProjectsMap } from '../../selectors/projects';
 import { iconsMap } from '../../utils/AppIcons';
+import NavigationActions from '../../navigation';
 
 import * as projectsActions from '../../actions/projects';
 
@@ -51,6 +52,7 @@ export default class ProjectEdit extends React.Component {
 
   constructor(props) {
     super(props);
+    NavigationActions.setNavigator(props.navigator);
 
     this.state = {
       name: this.props.item.get('name'),

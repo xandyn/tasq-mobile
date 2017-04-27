@@ -9,9 +9,9 @@ import types, {
 } from '../actions/projects';
 import { usersFill } from '../actions/users';
 import { selectProject } from '../actions/ui';
-import { modalClose } from '../actions/modal';
 import { projects, projectCreate, projectEdit, projectDelete } from '../api';
 import { projectSchema, projectsSchema } from '../api/schema';
+import NavigationActions from '../navigation';
 
 
 export function* fetchProjects() {
@@ -39,7 +39,6 @@ export function* createProject({ payload }) {
     const { entities } = normalize(response, projectSchema);
     yield put(projectCreateSuccess(entities.projects[response.id]));
     yield put(selectProject(response.id));
-    yield put(modalClose());
   }
   yield put(projectCreating(false));
 }
@@ -52,6 +51,7 @@ export function* editProject({ meta: { id }, payload }) {
   if (response) {
     const { entities } = normalize(response, projectSchema);
     yield put(projectEditSuccess(id, entities.projects[id]));
+    yield call(NavigationActions.pop);
   } else {
     yield put(projectEditFailure(id, error));
   }
@@ -63,10 +63,9 @@ export function* deleteProject({ meta: { id } }) {
   yield put(projectDeleting(id, true));
   const { response } = yield call(projectDelete, id);
   yield put(projectDeleting(id, false));
-  yield put(modalClose());
   if (response) {
-    yield put(selectProject(''));
     yield put(projectDeleteSuccess(id));
+    yield call(NavigationActions.popToRoot);
   } else {
     yield put(projectDeleteFailure(id));
   }
