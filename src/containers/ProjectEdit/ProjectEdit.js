@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, Text, TextInput } from 'react-native';
+import { View, ScrollView, Text, TextInput, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import Collaborators from '../Collaborators/Collaborators';
 import ProjectSettings from '../ProjectSettings/ProjectSettings';
+import Button from '../../components/core/Button/Button';
 
 import { getProjectsMap } from '../../selectors/projects';
 import { iconsMap } from '../../utils/AppIcons';
@@ -18,7 +19,8 @@ import styles from './ProjectEditStyles';
 
 
 @connect(
-  (_, { id }) => ({ projects }) => ({
+  (_, { id }) => ({ projects, profile }) => ({
+    profile: profile.data,
     item: getProjectsMap({ projects }).get(id),
   }),
   dispatch => bindActionCreators({
@@ -40,6 +42,7 @@ export default class ProjectEdit extends React.Component {
 
   static propTypes = {
     item: ImmutablePropTypes.map.isRequired,
+    profile: ImmutablePropTypes.map.isRequired,
     id: PropTypes.string.isRequired,
     projectEditRequest: PropTypes.func.isRequired,
     projectDeleteRequest: PropTypes.func.isRequired,
@@ -73,20 +76,31 @@ export default class ProjectEdit extends React.Component {
   };
 
   onDelete = () => {
-    const { id, projectDeleteRequest } = this.props;
-    projectDeleteRequest(id);
+    const onPress = () => {
+      const { id, projectDeleteRequest } = this.props;
+      projectDeleteRequest(id);
+    };
+    Alert.alert(
+      'Delete this project?',
+      '',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Delete', onPress, style: 'destructive' },
+      ],
+    );
   };
 
   render() {
     const { name } = this.state;
-    const { item } = this.props;
+    const { item, profile } = this.props;
+    const ownerIsCurrentUser = profile.get('email') === item.get('owner');
     const isShared = item.get('is_shared');
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer} elevation={1}>
           <Icon style={styles.icon} name={isShared ? 'people' : 'list'} size={20} />
           <TextInput
-            autoCapitalize={false}
+            autoCapitalize="none"
             style={styles.input}
             value={name}
             onChangeText={this.onChangeProjectName}
@@ -96,9 +110,21 @@ export default class ProjectEdit extends React.Component {
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={styles.label}>COLLABORATORS</Text>
-          <Collaborators project={item} />
+          <Collaborators
+            project={item}
+            ownerIsCurrentUser={ownerIsCurrentUser}
+          />
           <Text style={styles.label}>SETTINGS</Text>
           <ProjectSettings />
+          {ownerIsCurrentUser &&
+            <Button onPress={this.onDelete}>
+              <View style={styles.delete} elevation={1}>
+                <Text style={styles.deleteText}>
+                  DELETE PROJECT
+                </Text>
+              </View>
+            </Button>
+          }
         </ScrollView>
       </View>
     );

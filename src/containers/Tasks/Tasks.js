@@ -86,6 +86,7 @@ export default class Tasks extends React.Component {
     const { navigator } = this.props;
     return (
       <TaskItem
+        key={rowData}
         id={rowData.toString()}
         navigator={navigator}
       />
@@ -104,7 +105,7 @@ export default class Tasks extends React.Component {
         />
         {tasksIdsCompleted.count() > 0 &&
           <Button onPress={this.onToggleCompletedTasks}>
-            <View style={styles.tasksSwitcher}>
+            <View style={styles.tasksSwitcher} elevation={1}>
               <Text style={styles.tasksSwitcherText}>
                 {showCompletedTasks ? 'HIDE' : 'SHOW'} COMPLETED TASKS
               </Text>

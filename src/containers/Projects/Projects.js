@@ -28,6 +28,7 @@ export default class Projects extends React.Component {
     const { navigator } = this.props;
     return (
       <ProjectItem
+        key={rowData}
         id={rowData.toString()}
         navigator={navigator}
       />

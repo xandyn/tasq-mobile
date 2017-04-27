@@ -53,7 +53,7 @@ export default class LoginForm extends Component {
         <Field
           style={styles.input}
           autoCorrect={false}
-          autoCapitalize={false}
+          autoCapitalize="none"
           name="email"
           keyboardType="email-address"
           component={renderField}

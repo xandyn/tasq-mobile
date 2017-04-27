@@ -50,7 +50,7 @@ function byId(state = new Map(), action) {
       );
     case typesUsers.REMOVE_USER_FROM_PROJECT:
       return state.update(
-        action.meta.id,
+        action.meta.id.toString(),
         item => item.update(
           action.payload.id ? 'collaborators' : 'pending_collaborators',
           collabs => collabs.filter(email => email !== action.payload.email)

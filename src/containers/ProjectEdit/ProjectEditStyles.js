@@ -39,4 +39,14 @@ export default StyleSheet.create({
     marginBottom: 10,
     marginLeft: 20,
   },
+  delete: {
+    ...BaseStyles.btn,
+    ...BaseStyles.btnBigCentered,
+    backgroundColor: 'white',
+  },
+  deleteText: {
+    color: Colors.red,
+    fontFamily: 'Lato',
+    fontSize: 13,
+  },
 });

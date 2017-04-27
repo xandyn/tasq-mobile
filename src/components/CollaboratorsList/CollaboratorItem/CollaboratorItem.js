@@ -30,7 +30,7 @@ const CollaboratorItem = ({ item, status, onButtonPress, ownerIsCurrentUser }) =
 
   if (ownerIsCurrentUser && status !== 'owner') {
     return (
-      <CollaboratorIR onButtonPress={onButtonPress}>
+      <CollaboratorIR onButtonPress={onButtonPress(item.toJS())}>
         {row}
       </CollaboratorIR>
     );

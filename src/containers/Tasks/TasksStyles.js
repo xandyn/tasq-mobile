@@ -9,11 +9,7 @@ export default StyleSheet.create({
   },
   tasksSwitcher: {
     ...BaseStyles.btn,
-    marginVertical: 20,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 5,
+    ...BaseStyles.btnBigCentered,
     minWidth: 200,
   },
   tasksSwitcherText: {

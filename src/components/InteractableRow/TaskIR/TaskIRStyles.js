@@ -21,7 +21,7 @@ export default StyleSheet.create({
     left: Screen.width - 75,
     width: Screen.width,
     height: 60,
-    backgroundColor: Colors.orange,
+    backgroundColor: Colors.red,
     justifyContent: 'center'
   },
   doneHolder: {

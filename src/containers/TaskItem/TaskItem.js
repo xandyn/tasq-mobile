@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, Alert, TouchableWithoutFeedback } from 'react-native';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
@@ -10,6 +10,7 @@ import TaskIR from '../../components/InteractableRow/TaskIR/TaskIR';
 
 import { getTasksMap } from '../../selectors/tasks';
 import { getUserById } from '../../selectors/users';
+import * as tasksActions from '../../actions/tasks';
 
 import styles from './TaskItemStyles';
 
@@ -24,11 +25,16 @@ import styles from './TaskItemStyles';
       assignedToUser: assignedToUserId ? getUserById({ users, userId: assignedToUserId }) : null,
     };
   },
+  dispatch => bindActionCreators({
+    ...tasksActions,
+  }, dispatch)
 )
 export default class TaskItem extends React.Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     item: ImmutablePropTypes.map.isRequired,
+    taskEditRequest: PropTypes.func.isRequired,
+    taskDeleteRequest: PropTypes.func.isRequired,
     navigator: PropTypes.object.isRequired,
   };
 
@@ -42,6 +48,36 @@ export default class TaskItem extends React.Component {
   };
 
   onButtonPress = name => () => {
+    switch (name) {
+      case 'done':
+        this.onToggleComplete();
+        break;
+      case 'delete':
+        this.onDelete();
+        break;
+      default:
+        break;
+    }
+  };
+
+  onToggleComplete = () => {
+    const { id, item, taskEditRequest } = this.props;
+    taskEditRequest(id, { is_completed: !item.get('is_completed') });
+  };
+
+  onDelete = () => {
+    const onPress = () => {
+      const { id, taskDeleteRequest } = this.props;
+      taskDeleteRequest(id);
+    };
+    Alert.alert(
+      'Delete this task?',
+      '',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Delete', onPress, style: 'destructive' },
+      ],
+    );
   };
 
   render() {
