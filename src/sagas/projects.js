@@ -8,7 +8,6 @@ import types, {
   projectDeleteSuccess, projectDeleteFailure, projectDeleting,
 } from '../actions/projects';
 import { usersFill } from '../actions/users';
-import { selectProject } from '../actions/ui';
 import { projects, projectCreate, projectEdit, projectDelete } from '../api';
 import { projectSchema, projectsSchema } from '../api/schema';
 import NavigationActions from '../navigation';
@@ -38,7 +37,6 @@ export function* createProject({ payload }) {
   if (response) {
     const { entities } = normalize(response, projectSchema);
     yield put(projectCreateSuccess(entities.projects[response.id]));
-    yield put(selectProject(response.id));
   }
   yield put(projectCreating(false));
 }

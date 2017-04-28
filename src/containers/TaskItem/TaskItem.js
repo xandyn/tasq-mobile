@@ -13,6 +13,7 @@ import { getUserById } from '../../selectors/users';
 import * as tasksActions from '../../actions/tasks';
 
 import styles from './TaskItemStyles';
+import Colors from '../../styles/Colors';
 
 
 @connect(
@@ -107,7 +108,11 @@ export default class TaskItem extends React.Component {
                 {item.get('text')}
               </Text>
               {completionDate &&
-                <Text style={overdue ? styles.taskOverdue : styles.taskDue}>
+                <Text
+                  style={[styles.taskCompletion, {
+                    color: overdue ? Colors.red : Colors.textSecondary
+                  }]}
+                >
                   {moment(completionDate).calendar(null, calendarFormats)}
                   {!moment().isSame(completionDate, 'year') && moment(completionDate).format(' YYYY')}
                 </Text>

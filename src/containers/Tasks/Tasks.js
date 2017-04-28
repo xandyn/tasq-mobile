@@ -55,6 +55,18 @@ export default class Tasks extends React.Component {
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const currentTasksIdsCompletedCount = this.props.tasksIdsCompleted.count();
+    const nextTasksIdsCompletedCount = nextProps.tasksIdsCompleted.count();
+    const { showCompletedTasks } = this.state;
+    if (!showCompletedTasks && currentTasksIdsCompletedCount !== nextTasksIdsCompletedCount) {
+      this.setState({ showCompletedTasks: true });
+    }
+    if (showCompletedTasks && nextTasksIdsCompletedCount === 0) {
+      this.setState({ showCompletedTasks: false });
+    }
+  }
+
   onNavigatorEvent = (event) => {
     const { projectId, project, navigator } = this.props;
     switch (event.id) {

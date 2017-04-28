@@ -8,10 +8,9 @@ import {
   projectEditSuccess, projectEditFailure, projectEditing
 } from '../../actions/projects';
 import { usersFill } from '../../actions/users';
-import { selectProject } from '../../actions/ui';
-import { modalClose } from '../../actions/modal';
 import { projects, projectCreate, projectEdit } from '../../api';
 import { projectSchema, projectsSchema } from '../../api/schema';
+import NavigationActions from '../../navigation';
 
 import { fetchProjects, createProject, editProject } from '../projects';
 
@@ -95,14 +94,6 @@ describe('`createProject` Saga test', () => {
     expect(result).toEqual(put(projectCreateSuccess(entities.projects[response.id])));
   });
 
-  it('select new project', (result) => {
-    expect(result).toEqual(put(selectProject(response.id)));
-  });
-
-  it('close modal', (result) => {
-    expect(result).toEqual(put(modalClose()));
-  });
-
   it('change CREATE_STATE to `false`', (result) => {
     expect(result).toEqual(put(projectCreating(false)));
   });
@@ -139,6 +130,10 @@ describe('`editProject` Saga test', () => {
     it('normalize response, then apply changes to state', (result) => {
       const { entities } = normalize(response, projectSchema);
       expect(result).toEqual(put(projectEditSuccess(id, entities.projects[id])));
+    });
+
+    it('Navigate back', (result) => {
+      expect(result).toEqual(call(NavigationActions.pop));
     });
 
     it('change EDIT_STATE to `false`', (result) => {

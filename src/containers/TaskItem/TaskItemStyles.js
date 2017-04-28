@@ -38,17 +38,10 @@ export default StyleSheet.create({
     marginHorizontal: 20,
     textDecorationLine: 'line-through'
   },
-  taskDue: {
+  taskCompletion: {
     fontFamily: 'Lato',
     fontSize: 13,
     color: Colors.textSecondary,
-    marginTop: 5,
-    marginHorizontal: 20,
-  },
-  taskOverdue: {
-    fontFamily: 'Lato',
-    fontSize: 13,
-    color: Colors.red,
     marginTop: 5,
     marginHorizontal: 20,
   },
