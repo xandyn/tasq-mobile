@@ -86,10 +86,11 @@ export default class ProjectEdit extends React.Component {
     Alert.alert(
       'Delete this project?',
       '',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'Delete', onPress, style: 'destructive' },
-      ],
+      [{
+        text: 'Cancel', style: 'cancel'
+      }, {
+        text: 'Delete', onPress, style: 'destructive'
+      }],
     );
   };
 

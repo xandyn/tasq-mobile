@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import moment from 'moment';
+
+import Button from '../../components/core/Button/Button';
+import DateTimePicker from '../../components/DateTimePicker/DateTimePicker';
 
 import { getTasksMap } from '../../selectors/tasks';
 import { iconsMap } from '../../utils/AppIcons';
@@ -53,9 +55,9 @@ export default class TaskEdit extends React.Component {
     const note = item.get('note') || '';
     const completed = item.get('is_completed');
     const completionDate = item.get('completion_date')
-      ? moment(item.get('completion_date')).format() : '';
+      ? moment(item.get('completion_date')).toDate() : undefined;
     const notificationDate = item.get('notification_date')
-      ? moment(item.get('notification_date')).format() : '';
+      ? moment(item.get('notification_date')).toDate() : undefined;
 
     this.state = {
       text,
@@ -71,52 +73,80 @@ export default class TaskEdit extends React.Component {
   }
 
   onNavigatorEvent = (event) => {
+    const { text, note, completionDate, notificationDate } = this.state;
     const { id, taskEditRequest } = this.props;
     switch (event.id) {
-      case 'saveProject':
-        taskEditRequest(id, {  });
+      case 'saveTask':
+        taskEditRequest(id, {
+          text,
+          note,
+          completion_date: completionDate ? moment(completionDate).format() : null,
+          notification_date: notificationDate ? moment(notificationDate).format() : null,
+        });
         break;
       default:
         break;
     }
   };
 
-  onChangeTaskText = (text) => {
-    this.setState({ text });
-  };
-  render() {
-    const { text, note, completed, completionDate, notificationDate } = this.state;
-    const { item } = this.props;
-    const overdue = moment().isAfter(completionDate);
-    const calendarFormats = {
-      sameDay: '[Today at] HH:mm',
-      nextDay: '[Tomorrow at] HH:mm',
-      lastDay: '[Yesterday at] HH:mm',
-      nextWeek: 'ddd, D MMM',
-      lastWeek: 'ddd, D MMM',
-      sameElse: 'ddd, D MMM'
+  onDelete = () => {
+    const onPress = () => {
+      const { id, taskDeleteRequest } = this.props;
+      taskDeleteRequest(id, true);
     };
+    Alert.alert(
+      'Delete this task?',
+      '',
+      [{
+        text: 'Cancel', style: 'cancel'
+      }, {
+        text: 'Delete', onPress, style: 'destructive'
+      }],
+    );
+  };
+
+  render() {
+    const { text, note, completionDate, notificationDate } = this.state;
     return (
       <View style={styles.container}>
         <TextInput
           autoCapitalize="none"
           style={styles.input}
+          placeholderTextColor={Colors.textSecondary}
           value={text}
           name="text"
-          onChangeText={this.onChangeTaskText}
+          onChangeText={v => this.setState({ text: v })}
           placeholder="Project name"
           underlineColorAndroid="transparent"
         />
-        <View style={styles.datePicker}>
-          <Text
-            style={[styles.datePickerText, {
-              color: overdue ? Colors.red : Colors.textPrimary
-            }]}
-          >
-            {moment(completionDate).calendar(null, calendarFormats)}
-            {!moment().isSame(completionDate, 'year') && moment(completionDate).format(' YYYY')}
-          </Text>
-        </View>
+        <DateTimePicker
+          date={completionDate}
+          handleDatePicker={v => this.setState({ completionDate: v })}
+          placeholder="Set date of completion"
+        />
+        <DateTimePicker
+          date={notificationDate}
+          handleDatePicker={v => this.setState({ notificationDate: v })}
+          placeholder="Remind me"
+        />
+        <TextInput
+          multiline
+          autoCapitalize="none"
+          style={styles.textArea}
+          placeholderTextColor={Colors.textSecondary}
+          value={note}
+          name="note"
+          onChangeText={v => this.setState({ note: v })}
+          placeholder="Add note"
+          underlineColorAndroid="transparent"
+        />
+        <Button onPress={this.onDelete}>
+          <View style={styles.delete} elevation={1}>
+            <Text style={styles.deleteText}>
+              DELETE TASK
+            </Text>
+          </View>
+        </Button>
       </View>
     );
   }

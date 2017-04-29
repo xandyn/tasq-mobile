@@ -74,10 +74,11 @@ export default class TaskItem extends React.Component {
     Alert.alert(
       'Delete this task?',
       '',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'Delete', onPress, style: 'destructive' },
-      ],
+      [{
+        text: 'Cancel', style: 'cancel'
+      }, {
+        text: 'Delete', onPress, style: 'destructive'
+      }],
     );
   };
 
@@ -101,7 +102,9 @@ export default class TaskItem extends React.Component {
           <View style={styles.taskContent}>
             <View>
               <Text
-                style={isCompleted ? styles.taskTextCompleted : styles.taskText}
+                style={[styles.taskText, {
+                  textDecorationLine: isCompleted ? 'line-through' : 'none'
+                }]}
                 ellipsizeMode="tail"
                 numberOfLines={1}
               >

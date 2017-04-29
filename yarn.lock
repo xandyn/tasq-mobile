@@ -3637,6 +3637,10 @@ react-immutable-proptypes@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-immutable-proptypes/-/react-immutable-proptypes-2.1.0.tgz#023d6f39bb15c97c071e9e60d00d136eac5fa0b4"
 
+react-native-animatable@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.1.1.tgz#00ddc72985f62f62a11a505abb1a06e77a92cd8a"
+
 react-native-immutable-list-view@^0.4.3:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/react-native-immutable-list-view/-/react-native-immutable-list-view-0.4.3.tgz#2b6f25a35dd1ca987739b94548607fbc205f4851"
@@ -3646,6 +3650,19 @@ react-native-immutable-list-view@^0.4.3:
 react-native-interactable@^0.0.8:
   version "0.0.8"
   resolved "https://registry.yarnpkg.com/react-native-interactable/-/react-native-interactable-0.0.8.tgz#f4a175daccded50aa7edc67fb65f64e325eec70c"
+
+react-native-modal-datetime-picker@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-modal-datetime-picker/-/react-native-modal-datetime-picker-4.4.0.tgz#a60d3c2032035216241d24af3d3a7411b355be10"
+  dependencies:
+    moment "^2.18.1"
+    react-native-modal "^2.2.0"
+
+react-native-modal@^2.2.0, react-native-modal@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-2.3.2.tgz#d616355e312d378a9dcd99de5565523b7b5b4c84"
+  dependencies:
+    react-native-animatable "^1.1.1"
 
 react-native-navigation@^1.1.17:
   version "1.1.17"

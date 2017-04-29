@@ -110,10 +110,10 @@ export function taskEditing(id, payload) {
 }
 
 types.DELETE_TASK_REQUEST = 'tasks/DELETE_TASK_REQUEST';
-export function taskDeleteRequest(id) {
+export function taskDeleteRequest(id, popScreen = false) {
   return {
     type: types.DELETE_TASK_REQUEST,
-    meta: { id }
+    meta: { id, popScreen }
   };
 }
 

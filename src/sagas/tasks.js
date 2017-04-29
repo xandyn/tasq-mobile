@@ -7,9 +7,9 @@ import types, {
   taskEditSuccess, taskEditFailure, taskEditing,
   taskDeleteSuccess, taskDeleteFailure, taskDeleting
 } from '../actions/tasks';
-import { modalClose } from '../actions/modal';
 import { tasks, taskCreate, taskEdit, taskDelete } from '../api';
 import { taskSchema, tasksSchema } from '../api/schema';
+import NavigationActions from '../navigation';
 
 
 export function* fetchTasks() {
@@ -47,6 +47,7 @@ export function* editTask({ meta: { id }, payload }) {
   if (response) {
     const { entities } = normalize(response, taskSchema);
     yield put(taskEditSuccess(id, entities.tasks[id]));
+    yield call(NavigationActions.pop);
   } else {
     yield put(taskEditFailure(id, error));
   }
@@ -54,14 +55,14 @@ export function* editTask({ meta: { id }, payload }) {
 }
 
 
-export function* deleteTask({ meta: { id } }) {
+export function* deleteTask({ meta: { id, popScreen } }) {
   yield put(taskDeleting(id, true));
   const { response } = yield call(taskDelete, id);
   yield put(taskDeleting(id, false));
-  yield put(modalClose());
 
   if (response) {
     yield put(taskDeleteSuccess(id));
+    if (popScreen) yield call(NavigationActions.pop);
   } else {
     yield put(taskDeleteFailure(id));
   }

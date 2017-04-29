@@ -61,20 +61,22 @@ export default class Collaborators extends React.Component {
         Alert.alert(
           'Give leader',
           'Are you sure want give leader to this collaborator?\nThis is can not be undone.',
-          [
-            { text: 'Cancel', style: 'cancel' },
-            { text: 'OK', onPress: () => {}, style: 'default' },
-          ],
+          [{
+            text: 'Cancel', style: 'cancel'
+          }, {
+            text: 'OK', onPress: () => {}, style: 'default'
+          }],
         );
         break;
       case 'delete':
         Alert.alert(
           'Delete this collaborator?',
           '',
-          [
-            { text: 'Cancel', style: 'cancel' },
-            { text: 'Delete', onPress: () => this.onDeleteCollaborator(item), style: 'destructive' },
-          ],
+          [{
+            text: 'Cancel', style: 'cancel'
+          }, {
+            text: 'Delete', onPress: () => this.onDeleteCollaborator(item), style: 'destructive'
+          }],
         );
         break;
       default:

@@ -9,6 +9,7 @@ import {
 } from '../../actions/tasks';
 import { tasks, taskCreate, taskEdit } from '../../api';
 import { taskSchema, tasksSchema } from '../../api/schema';
+import NavigationActions from '../../navigation';
 
 import { fetchTasks, createTask, editTask } from '../tasks';
 
@@ -119,6 +120,10 @@ describe('`editTask` Saga test', () => {
     it('normalize response, then apply changes to state', (result) => {
       const { entities } = normalize(response, taskSchema);
       expect(result).toEqual(put(taskEditSuccess(id, entities.tasks[id])));
+    });
+
+    it('Navigate back', (result) => {
+      expect(result).toEqual(call(NavigationActions.pop));
     });
 
     it('change EDIT_STATE to `false`', (result) => {
