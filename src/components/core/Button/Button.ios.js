@@ -4,7 +4,10 @@ import { TouchableOpacity } from 'react-native';
 
 
 const Button = ({ children, ...props }) => (
-  <TouchableOpacity {...props}>
+  <TouchableOpacity
+    activeOpacity={0.85}
+    {...props}
+  >
     {children}
   </TouchableOpacity>
 );

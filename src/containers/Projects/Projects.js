@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import ImmutableListView from 'react-native-immutable-list-view';
 
+import CreateProjectModal from '../CreateProjectModal/CreateProjectModal';
 import ProjectItem from '../ProjectItem/ProjectItem';
 
 import { getProjectsIds } from '../../selectors/projects';
@@ -43,6 +44,7 @@ export default class Projects extends React.Component {
           immutableData={projectsIds}
           renderRow={this.renderRow}
         />
+        <CreateProjectModal />
       </View>
     );
   }
