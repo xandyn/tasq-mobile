@@ -15,7 +15,7 @@
 		"prop-types": "^15.5.8",
 		"react": "16.0.0-alpha.6",
 		"react-immutable-proptypes": "^2.1.0",
-		"react-native": "0.43.3",
+		"react-native": "^0.44.0",
 		"react-native-animatable": "^1.1.1",
 		"react-native-immutable-list-view": "^0.4.3",
 		"react-native-interactable": "^0.0.8",

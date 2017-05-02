@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Animated, Dimensions, StyleSheet } from 'react-native';
+import { View, Animated, Dimensions, StyleSheet, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 
 import FabButton from '../../components/FabButton/FabButton';
@@ -38,6 +38,10 @@ export default class FabModal extends React.Component {
     this.openAnimation = new Animated.Value(props.open ? 1 : 0);
   }
 
+  componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.hardwareBackPress);
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.open !== prevProps.open) {
       Animated.timing(this.openAnimation, {
@@ -46,6 +50,19 @@ export default class FabModal extends React.Component {
       }).start();
     }
   }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.hardwareBackPress);
+  }
+
+  hardwareBackPress = () => {
+    const { open, toggleModal } = this.props;
+    if (open) {
+      toggleModal();
+      return true;
+    }
+    return false;
+  };
 
   render() {
     const { open, children, toggleModal, button, style } = this.props;
@@ -107,7 +124,7 @@ export default class FabModal extends React.Component {
           ]}
           pointerEvents={open ? 'auto' : 'none'}
         >
-          {children}
+          {open && children}
         </Animated.View>
         <FabButton onPress={toggleModal} close={open}>
           {button}

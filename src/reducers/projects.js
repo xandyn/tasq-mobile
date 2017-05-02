@@ -12,7 +12,7 @@ function allIds(state = new List(), action) {
     case types.CLEAR_PROJECTS:
       return new List();
     case types.CREATE_PROJECT_SUCCESS:
-      return state.push(action.payload.id);
+      return state.unshift(action.payload.id);
     case types.DELETE_PROJECT_SUCCESS:
       return state.filter(id => id !== +action.meta.id);
     default:

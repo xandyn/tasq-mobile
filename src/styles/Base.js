@@ -9,6 +9,9 @@ const BaseStyles = {
     backgroundColor: '#F4F3F1',
   },
   btn: {
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#568D8A',
     borderRadius: 3,
   },

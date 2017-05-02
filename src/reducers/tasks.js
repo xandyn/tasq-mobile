@@ -11,7 +11,7 @@ function allIds(state = new List(), action) {
     case types.CLEAR_TASKS:
       return new List();
     case types.CREATE_TASK_SUCCESS:
-      return state.push(action.payload.id);
+      return state.unshift(action.payload.id);
     case types.DELETE_TASK_SUCCESS:
       return state.filter(id => id !== +action.meta.id);
     default:
