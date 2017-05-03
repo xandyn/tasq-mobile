@@ -5,8 +5,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import ImmutableListView from 'react-native-immutable-list-view';
 
-import CreateProject from '../CreateProject/CreateProject';
 import ProjectItem from '../ProjectItem/ProjectItem';
+import FabButton from '../../components/FabButton/FabButton';
 
 import { getProjectsIds } from '../../selectors/projects';
 
@@ -22,6 +22,14 @@ export default class Projects extends React.Component {
   static propTypes = {
     projectsIds: ImmutablePropTypes.list.isRequired,
     navigator: PropTypes.object.isRequired,
+  };
+
+  onCreateProject = () => {
+    const { navigator } = this.props;
+    navigator.showModal({
+      screen: 'tasq.ProjectCreate',
+      title: 'Create new project',
+    });
   };
 
   renderRow = (rowData) => {
@@ -43,7 +51,7 @@ export default class Projects extends React.Component {
           immutableData={projectsIds}
           renderRow={this.renderRow}
         />
-        <CreateProject />
+        <FabButton onPress={this.onCreateProject} />
       </View>
     );
   }

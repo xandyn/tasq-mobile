@@ -74,10 +74,10 @@ export function taskCreating(payload) {
 }
 
 types.EDIT_TASK_REQUEST = 'tasks/EDIT_TASK_REQUEST';
-export function taskEditRequest(id, payload) {
+export function taskEditRequest(id, popScreen = false, payload) {
   return {
     type: types.EDIT_TASK_REQUEST,
-    meta: { id },
+    meta: { id, popScreen },
     payload
   };
 }

@@ -1,99 +1,84 @@
 import React from 'react';
-import { View, ScrollView, Text, TextInput, Alert } from 'react-native';
+import { ScrollView, TextInput, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import moment from 'moment';
 
-import Button from '../../components/core/Button/Button';
 import UserPicker from '../../components/UserPicker/UserPicker';
 import DateTimePicker from '../../components/DateTimePicker/DateTimePicker';
 
-import { getProjectsMap } from '../../selectors/projects';
-import { getTasksMap } from '../../selectors/tasks';
 import { iconsMap } from '../../utils/AppIcons';
 import NavigationActions from '../../navigation';
 
+import { getProjectsMap } from '../../selectors/projects';
 import { getUserById, getUsersByIds } from '../../selectors/users';
 import * as tasksActions from '../../actions/tasks';
 
-import styles from './TaskEditStyles';
+import styles from './TaskCreateStyles';
 import Colors from '../../styles/Colors';
 
 
 @connect(
-  (_, { id }) => ({ projects, tasks, users }) => {
-    const task = getTasksMap({ tasks }).get(id);
-    const project = getProjectsMap({ projects }).get(task.get('project').toString());
-    const assignedToUserId = task.get('assigned_to_user');
+  (_, { projectId }) => ({ projects, tasks, users }) => {
+    const project = getProjectsMap({ projects }).get(projectId);
     const ownerId = project.get('owner');
     const collaboratorsIds = project.get('collaborators');
     return {
-      item: task,
       owner: getUserById({ users, userId: ownerId }),
       collaborators: getUsersByIds({ users, usersIds: collaboratorsIds }),
-      assignedToUser: assignedToUserId ?
-        getUserById({ users, userId: assignedToUserId }) : undefined,
+      isCreating: tasks.meta.get('creating'),
     };
   },
   dispatch => bindActionCreators({
     ...tasksActions,
   }, dispatch)
 )
-export default class TaskEdit extends React.Component {
+export default class CreateProject extends React.Component {
   static navigatorStyle = {
     navBarTextFontFamily: 'Lato',
     navBarTitleTextCentered: true,
   };
 
   static navigatorButtons = {
-    rightButtons: [{
-      title: 'Save',
-      id: 'saveTask',
-      icon: iconsMap['ios-checkmark--big']
-    }]
-  };
-
-  static defaultProps = {
-    assignedToUser: undefined,
+    leftButtons: [{
+      title: 'Close',
+      id: 'back',
+    }],
+    rightButtons: [
+      Platform.OS === 'ios' ? {
+        title: 'Done',
+        id: 'saveTask',
+      } : {
+        title: 'Save',
+        id: 'saveTask',
+        icon: iconsMap['ios-checkmark--big']
+      }
+    ]
   };
 
   static propTypes = {
-    item: ImmutablePropTypes.map.isRequired,
     owner: ImmutablePropTypes.map.isRequired,
     collaborators: ImmutablePropTypes.list.isRequired,
-    assignedToUser: ImmutablePropTypes.map,
-    id: PropTypes.string.isRequired,
+    projectId: PropTypes.string.isRequired,
+    isCreating: PropTypes.bool.isRequired,
+    taskCreateRequest: PropTypes.func.isRequired,
     navigator: PropTypes.object.isRequired,
-    taskEditRequest: PropTypes.func.isRequired,
-    taskDeleteRequest: PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
 
-    const { item, assignedToUser, navigator } = props;
-
-    const text = item.get('text');
-    const note = item.get('note') || '';
-    const user = assignedToUser;
-    const completed = item.get('is_completed');
-    const completionDate = item.get('completion_date')
-      ? moment(item.get('completion_date')).toDate() : undefined;
-    const notificationDate = item.get('notification_date')
-      ? moment(item.get('notification_date')).toDate() : undefined;
-
     this.state = {
-      text,
-      note,
-      user,
-      completed,
-      completionDate,
-      notificationDate
+      text: '',
+      note: '',
+      user: null,
+      completionDate: undefined,
+      notificationDate: undefined,
     };
 
-    NavigationActions.setNavigator(navigator);
+    NavigationActions.setNavigator(props.navigator);
 
     this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
@@ -103,33 +88,21 @@ export default class TaskEdit extends React.Component {
       case 'saveTask':
         this.saveTask();
         break;
+      case 'back':
+        this.props.navigator.dismissModal();
+        break;
       default:
         break;
     }
   };
 
-  onDelete = () => {
-    const onPress = () => {
-      const { id, taskDeleteRequest } = this.props;
-      taskDeleteRequest(id, true);
-    };
-    Alert.alert(
-      'Delete this task?',
-      '',
-      [{
-        text: 'Cancel', style: 'cancel'
-      }, {
-        text: 'Delete', onPress, style: 'destructive'
-      }],
-    );
-  };
-
   saveTask = () => {
+    const { taskCreateRequest, projectId } = this.props;
     const { text, note, user, completionDate, notificationDate } = this.state;
-    const { id, taskEditRequest } = this.props;
-    taskEditRequest(id, true, {
+    taskCreateRequest({
       text,
       note,
+      project_id: projectId,
       assigned_to_user_id: user ? user.get('id') : null,
       completion_date: completionDate ? moment(completionDate).format() : null,
       notification_date: notificationDate ? moment(notificationDate).format() : null,
@@ -143,6 +116,7 @@ export default class TaskEdit extends React.Component {
     return (
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <TextInput
+          autoFocus
           autoCapitalize="none"
           style={styles.input}
           placeholderTextColor={Colors.textSecondary}
@@ -178,13 +152,6 @@ export default class TaskEdit extends React.Component {
           placeholder="Add note"
           underlineColorAndroid="transparent"
         />
-        <Button onPress={this.onDelete}>
-          <View style={styles.delete} elevation={1}>
-            <Text style={styles.deleteText}>
-              DELETE TASK
-            </Text>
-          </View>
-        </Button>
       </ScrollView>
     );
   }

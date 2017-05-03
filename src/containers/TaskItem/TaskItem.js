@@ -8,6 +8,7 @@ import moment from 'moment';
 
 import TaskIR from '../../components/InteractableRow/TaskIR/TaskIR';
 
+import { getProjectsMap } from '../../selectors/projects';
 import { getTasksMap } from '../../selectors/tasks';
 import { getUserById } from '../../selectors/users';
 import * as tasksActions from '../../actions/tasks';
@@ -21,7 +22,7 @@ import Colors from '../../styles/Colors';
     const task = getTasksMap({ tasks }).get(id);
     const assignedToUserId = task.get('assigned_to_user');
     return {
-      project: project || projects.byId.get(task.get('project').toString()),
+      project: project || getProjectsMap({ projects }).get(task.get('project').toString()),
       item: task,
       assignedToUser: assignedToUserId ? getUserById({ users, userId: assignedToUserId }) : null,
     };
@@ -43,6 +44,7 @@ export default class TaskItem extends React.Component {
     const { id, navigator } = this.props;
     navigator.push({
       screen: 'tasq.TaskEdit',
+      title: 'Edit task',
       passProps: { id },
       backButtonTitle: '',
     });
@@ -63,7 +65,7 @@ export default class TaskItem extends React.Component {
 
   onToggleComplete = () => {
     const { id, item, taskEditRequest } = this.props;
-    taskEditRequest(id, { is_completed: !item.get('is_completed') });
+    taskEditRequest(id, false, { is_completed: !item.get('is_completed') });
   };
 
   onDelete = () => {

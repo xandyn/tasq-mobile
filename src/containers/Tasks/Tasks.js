@@ -3,10 +3,10 @@ import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import ImmutableListView from 'react-native-immutable-list-view';
 
 import Button from '../../components/core/Button/Button';
+import FabButton from '../../components/FabButton/FabButton';
 import TaskItem from '../TaskItem/TaskItem';
 
 import { getProjectTasksIdsCompleted, getProjectTasksIdsUncompleted } from '../../selectors/tasks';
@@ -94,6 +94,15 @@ export default class Tasks extends React.Component {
     }));
   };
 
+  onCreateTask = () => {
+    const { navigator, projectId } = this.props;
+    navigator.showModal({
+      screen: 'tasq.TaskCreate',
+      title: 'Create new task',
+      passProps: { projectId }
+    });
+  };
+
   renderRow = (rowData) => {
     const { navigator } = this.props;
     return (
@@ -131,6 +140,7 @@ export default class Tasks extends React.Component {
             renderRow={this.renderRow}
           />
         }
+        <FabButton onPress={this.onCreateTask} />
       </View>
     );
   }

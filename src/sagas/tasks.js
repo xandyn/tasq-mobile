@@ -35,19 +35,20 @@ export function* createTask({ payload }) {
   if (response) {
     const { entities } = normalize(response, taskSchema);
     yield put(taskCreateSuccess(entities.tasks[response.id]));
+    yield call(NavigationActions.dismissModal);
   }
   yield put(taskCreating(false));
 }
 
 
-export function* editTask({ meta: { id }, payload }) {
+export function* editTask({ meta: { id, popScreen }, payload }) {
   yield put(taskEditing(id, true));
   const { response, error } = yield call(taskEdit, id, payload);
 
   if (response) {
     const { entities } = normalize(response, taskSchema);
     yield put(taskEditSuccess(id, entities.tasks[id]));
-    yield call(NavigationActions.pop);
+    if (popScreen) yield call(NavigationActions.pop);
   } else {
     yield put(taskEditFailure(id, error));
   }

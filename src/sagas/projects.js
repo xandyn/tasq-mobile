@@ -37,6 +37,7 @@ export function* createProject({ payload }) {
   if (response) {
     const { entities } = normalize(response, projectSchema);
     yield put(projectCreateSuccess(entities.projects[response.id]));
+    yield call(NavigationActions.dismissModal);
   }
   yield put(projectCreating(false));
 }

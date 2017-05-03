@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 
 import FabButton from '../../components/FabButton/FabButton';
 
-import styles from './FabModalStyles';
-
 
 const WindowHeight = Dimensions.get('window').height;
 const AnimationDuration = 200;

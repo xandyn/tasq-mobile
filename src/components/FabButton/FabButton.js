@@ -9,11 +9,12 @@ import styles from './FabButtonStyles';
 class FabButton extends React.Component {
   static defaultProps = {
     children: undefined,
+    close: false,
   };
 
   static propTypes = {
     children: PropTypes.node,
-    close: PropTypes.bool.isRequired,
+    close: PropTypes.bool,
     onPress: PropTypes.func.isRequired,
   };
 
