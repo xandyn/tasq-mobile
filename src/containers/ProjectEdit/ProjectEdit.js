@@ -29,19 +29,6 @@ import styles from './ProjectEditStyles';
   }, dispatch)
 )
 export default class ProjectEdit extends React.Component {
-  static navigatorStyle = {
-    navBarTextFontFamily: 'Lato',
-    navBarTitleTextCentered: true,
-  };
-
-  static navigatorButtons = {
-    rightButtons: [{
-      title: 'Save',
-      id: 'saveProject',
-      icon: iconsMap['ios-checkmark--big']
-    }]
-  };
-
   static propTypes = {
     item: ImmutablePropTypes.map.isRequired,
     profile: ImmutablePropTypes.map.isRequired,

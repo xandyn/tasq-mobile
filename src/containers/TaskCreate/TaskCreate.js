@@ -36,28 +36,6 @@ import Colors from '../../styles/Colors';
   }, dispatch)
 )
 export default class CreateProject extends React.Component {
-  static navigatorStyle = {
-    navBarTextFontFamily: 'Lato',
-    navBarTitleTextCentered: true,
-  };
-
-  static navigatorButtons = {
-    leftButtons: [{
-      title: 'Close',
-      id: 'back',
-    }],
-    rightButtons: [
-      Platform.OS === 'ios' ? {
-        title: 'Done',
-        id: 'saveTask',
-      } : {
-        title: 'Save',
-        id: 'saveTask',
-        icon: iconsMap['ios-checkmark--big']
-      }
-    ]
-  };
-
   static propTypes = {
     owner: ImmutablePropTypes.map.isRequired,
     collaborators: ImmutablePropTypes.list.isRequired,

@@ -28,7 +28,7 @@ export default class ProjectItem extends React.Component {
   onClickProject = () => {
     const { id, item, navigator } = this.props;
     navigator.push({
-      screen: 'tasq.Tasks',
+      screen: 'tasq.TasksScreen',
       title: item.get('name'),
       passProps: {
         projectId: id

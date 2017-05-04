@@ -16,7 +16,7 @@ registerScreens(store, Provider);
 export const startApp = () => {
   Navigation.startSingleScreenApp({
     screen: {
-      screen: 'tasq.Home',
+      screen: 'tasq.HomeScreen',
       navigatorButtons: {
         leftButtons: [
           {
@@ -51,7 +51,7 @@ export const startApp = () => {
 export const startLogin = () => {
   Navigation.startSingleScreenApp({
     screen: {
-      screen: 'tasq.Login',
+      screen: 'tasq.LoginScreen',
       navigatorStyle: {
         navBarHidden: true,
       },

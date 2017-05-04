@@ -43,7 +43,7 @@ export default class TaskItem extends React.Component {
   onClickTask = () => {
     const { id, navigator } = this.props;
     navigator.push({
-      screen: 'tasq.TaskEdit',
+      screen: 'tasq.TaskEditScreen',
       title: 'Edit task',
       passProps: { id },
       backButtonTitle: '',

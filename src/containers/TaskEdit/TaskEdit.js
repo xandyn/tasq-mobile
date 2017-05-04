@@ -42,19 +42,6 @@ import Colors from '../../styles/Colors';
   }, dispatch)
 )
 export default class TaskEdit extends React.Component {
-  static navigatorStyle = {
-    navBarTextFontFamily: 'Lato',
-    navBarTitleTextCentered: true,
-  };
-
-  static navigatorButtons = {
-    rightButtons: [{
-      title: 'Save',
-      id: 'saveTask',
-      icon: iconsMap['ios-checkmark--big']
-    }]
-  };
-
   static defaultProps = {
     assignedToUser: undefined,
   };

@@ -21,28 +21,6 @@ import styles from './ProjectCreateStyles';
   }, dispatch)
 )
 class CreateProject extends React.Component {
-  static navigatorStyle = {
-    navBarTextFontFamily: 'Lato',
-    navBarTitleTextCentered: true,
-  };
-
-  static navigatorButtons = {
-    leftButtons: [{
-      title: 'Close',
-      id: 'back',
-    }],
-    rightButtons: [
-      Platform.OS === 'ios' ? {
-        title: 'Done',
-        id: 'saveProject',
-      } : {
-        title: 'Save',
-        id: 'saveProject',
-        icon: iconsMap['ios-checkmark--big']
-      }
-    ]
-  };
-
   static propTypes = {
     isCreating: PropTypes.bool.isRequired,
     projectCreateRequest: PropTypes.func.isRequired,

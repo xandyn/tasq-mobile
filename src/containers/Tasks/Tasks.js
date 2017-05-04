@@ -24,19 +24,6 @@ import styles from './TasksStyles';
   }),
 )
 export default class Tasks extends React.Component {
-  static navigatorStyle = {
-    navBarTextFontFamily: 'Lato',
-    navBarTitleTextCentered: true,
-  };
-
-  static navigatorButtons = {
-    rightButtons: [{
-      title: 'Edit',
-      id: 'editProject',
-      icon: iconsMap.pencil
-    }]
-  };
-
   static propTypes = {
     project: ImmutablePropTypes.map.isRequired,
     tasksIdsCompleted: ImmutablePropTypes.list.isRequired,
@@ -78,7 +65,7 @@ export default class Tasks extends React.Component {
       case 'editProject':
         navigator.push({
           title: 'Edit project',
-          screen: 'tasq.ProjectEdit',
+          screen: 'tasq.ProjectEditScreen',
           passProps: { id: projectId },
           backButtonTitle: '',
         });
@@ -97,7 +84,7 @@ export default class Tasks extends React.Component {
   onCreateTask = () => {
     const { navigator, projectId } = this.props;
     navigator.showModal({
-      screen: 'tasq.TaskCreate',
+      screen: 'tasq.TaskCreateScreen',
       title: 'Create new task',
       passProps: { projectId }
     });

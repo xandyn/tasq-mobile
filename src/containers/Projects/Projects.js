@@ -27,7 +27,7 @@ export default class Projects extends React.Component {
   onCreateProject = () => {
     const { navigator } = this.props;
     navigator.showModal({
-      screen: 'tasq.ProjectCreate',
+      screen: 'tasq.ProjectCreateScreen',
       title: 'Create new project',
     });
   };

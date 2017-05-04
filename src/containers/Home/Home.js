@@ -28,17 +28,6 @@ import styles from './HomeStyles';
   }, dispatch)
 )
 export default class Home extends Component {
-  static navigatorStyle = {
-    navBarNoBorder: true,
-    topBarElevationShadowEnabled: false,
-    navBarBackgroundColor: Colors.primary,
-    statusBarColor: Colors.primary,
-    navBarTextColor: 'white',
-    navBarButtonColor: 'white',
-    navBarTextFontFamily: 'Lato',
-    statusBarTextColorScheme: 'light',
-  };
-
   static propTypes = {
     profileFetch: PropTypes.func.isRequired,
     projectsFetch: PropTypes.func.isRequired,
