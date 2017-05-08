@@ -5,8 +5,6 @@ import profile from './profile';
 import projects from './projects';
 import tasks from './tasks';
 import users from './users';
-import modal from './modal';
-import ui from './ui';
 
 const sagas = [
   ...auth,
@@ -14,8 +12,6 @@ const sagas = [
   ...projects,
   ...tasks,
   ...users,
-  ...modal,
-  ...ui
 ];
 
 export default function* rootSaga() {

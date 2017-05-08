@@ -4,8 +4,8 @@ import { normalize } from 'normalizr';
 
 import {
   projectsFill, projectsFetching,
-  projectCreateSuccess, projectCreating,
-  projectEditSuccess, projectEditFailure, projectEditing
+  projectCreateSuccess,
+  projectEditSuccess, projectEditFailure,
 } from '../../actions/projects';
 import { usersFill } from '../../actions/users';
 import { projects, projectCreate, projectEdit } from '../../api';
@@ -80,8 +80,8 @@ describe('`createProject` Saga test', () => {
     }
   };
 
-  it('change CREATE_STATE to `true`', (result) => {
-    expect(result).toEqual(put(projectCreating(true)));
+  it('show spinner', (result) => {
+    expect(result).toEqual(call(NavigationActions.showSpinner));
   });
 
   it('call API', (result) => {
@@ -94,8 +94,12 @@ describe('`createProject` Saga test', () => {
     expect(result).toEqual(put(projectCreateSuccess(entities.projects[response.id])));
   });
 
-  it('change CREATE_STATE to `false`', (result) => {
-    expect(result).toEqual(put(projectCreating(false)));
+  it('dismiss modal', (result) => {
+    expect(result).toEqual(call(NavigationActions.dismissModal));
+  });
+
+  it('hide spinner', (result) => {
+    expect(result).toEqual(call(NavigationActions.hideSpinner));
   });
 
   it('end.', (result) => {
@@ -118,8 +122,8 @@ describe('`editProject` Saga test', () => {
     };
     const it = sagaHelper(editProject({ meta: { id }, payload }));
 
-    it('change EDIT_STATE to `true`', (result) => {
-      expect(result).toEqual(put(projectEditing(id, true)));
+    it('show spinner', (result) => {
+      expect(result).toEqual(call(NavigationActions.showSpinner));
     });
 
     it('call API', (result) => {
@@ -136,8 +140,8 @@ describe('`editProject` Saga test', () => {
       expect(result).toEqual(call(NavigationActions.pop));
     });
 
-    it('change EDIT_STATE to `false`', (result) => {
-      expect(result).toEqual(put(projectEditing(id, false)));
+    it('hide spinner', (result) => {
+      expect(result).toEqual(call(NavigationActions.hideSpinner));
     });
 
     it('end.', (result) => {
@@ -152,8 +156,8 @@ describe('`editProject` Saga test', () => {
     const error = { error: 'Project not found.' };
     const it = sagaHelper(editProject({ meta: { id }, payload }));
 
-    it('change EDIT_STATE to `true`', (result) => {
-      expect(result).toEqual(put(projectEditing(id, true)));
+    it('show spinner', (result) => {
+      expect(result).toEqual(call(NavigationActions.showSpinner));
     });
 
     it('call API', (result) => {
@@ -165,8 +169,8 @@ describe('`editProject` Saga test', () => {
       expect(result).toEqual(put(projectEditFailure(id, error)));
     });
 
-    it('change EDIT_STATE to `false`', (result) => {
-      expect(result).toEqual(put(projectEditing(id, false)));
+    it('hide spinner', (result) => {
+      expect(result).toEqual(call(NavigationActions.hideSpinner));
     });
 
     it('end.', (result) => {

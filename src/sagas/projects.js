@@ -3,9 +3,9 @@ import { normalize } from 'normalizr';
 
 import types, {
   projectsFill, projectsFetching,
-  projectCreateSuccess, projectCreating,
-  projectEditSuccess, projectEditFailure, projectEditing,
-  projectDeleteSuccess, projectDeleteFailure, projectDeleting,
+  projectCreateSuccess,
+  projectEditSuccess, projectEditFailure,
+  projectDeleteSuccess, projectDeleteFailure,
 } from '../actions/projects';
 import { usersFill } from '../actions/users';
 import { projects, projectCreate, projectEdit, projectDelete } from '../api';
@@ -31,7 +31,7 @@ export function* fetchProjects() {
 
 
 export function* createProject({ payload }) {
-  yield put(projectCreating(true));
+  yield call(NavigationActions.showSpinner);
   const { response } = yield call(projectCreate, payload);
 
   if (response) {
@@ -39,12 +39,12 @@ export function* createProject({ payload }) {
     yield put(projectCreateSuccess(entities.projects[response.id]));
     yield call(NavigationActions.dismissModal);
   }
-  yield put(projectCreating(false));
+  yield call(NavigationActions.hideSpinner);
 }
 
 
 export function* editProject({ meta: { id }, payload }) {
-  yield put(projectEditing(id, true));
+  yield call(NavigationActions.showSpinner);
   const { response, error } = yield call(projectEdit, id, payload);
 
   if (response) {
@@ -54,14 +54,14 @@ export function* editProject({ meta: { id }, payload }) {
   } else {
     yield put(projectEditFailure(id, error));
   }
-  yield put(projectEditing(id, false));
+  yield call(NavigationActions.hideSpinner);
 }
 
 
 export function* deleteProject({ meta: { id } }) {
-  yield put(projectDeleting(id, true));
+  yield call(NavigationActions.showSpinner);
   const { response } = yield call(projectDelete, id);
-  yield put(projectDeleting(id, false));
+  yield call(NavigationActions.hideSpinner);
   if (response) {
     yield put(projectDeleteSuccess(id));
     yield call(NavigationActions.popToRoot);

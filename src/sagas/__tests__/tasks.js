@@ -4,8 +4,8 @@ import { normalize } from 'normalizr';
 
 import {
   tasksFill, tasksFetching,
-  taskCreateSuccess, taskCreating,
-  taskEditSuccess, taskEditFailure, taskEditing
+  taskCreateSuccess,
+  taskEditSuccess, taskEditFailure,
 } from '../../actions/tasks';
 import { tasks, taskCreate, taskEdit } from '../../api';
 import { taskSchema, tasksSchema } from '../../api/schema';
@@ -70,8 +70,8 @@ describe('`createTask` Saga test', () => {
     text: 'test task'
   };
 
-  it('change CREATE_STATE to `true`', (result) => {
-    expect(result).toEqual(put(taskCreating(true)));
+  it('show spinner', (result) => {
+    expect(result).toEqual(call(NavigationActions.showSpinner));
   });
 
   it('call API', (result) => {
@@ -84,8 +84,12 @@ describe('`createTask` Saga test', () => {
     expect(result).toEqual(put(taskCreateSuccess(entities.tasks[response.id])));
   });
 
-  it('change CREATE_STATE to `false`', (result) => {
-    expect(result).toEqual(put(taskCreating(false)));
+  it('dismiss modal', (result) => {
+    expect(result).toEqual(call(NavigationActions.dismissModal));
+  });
+
+  it('hide spinner', (result) => {
+    expect(result).toEqual(call(NavigationActions.hideSpinner));
   });
 
   it('end.', (result) => {
@@ -108,8 +112,8 @@ describe('`editTask` Saga test', () => {
     };
     const it = sagaHelper(editTask({ meta: { id }, payload }));
 
-    it('change EDIT_STATE to `true`', (result) => {
-      expect(result).toEqual(put(taskEditing(id, true)));
+    it('show spinner', (result) => {
+      expect(result).toEqual(call(NavigationActions.showSpinner));
     });
 
     it('call API', (result) => {
@@ -122,12 +126,8 @@ describe('`editTask` Saga test', () => {
       expect(result).toEqual(put(taskEditSuccess(id, entities.tasks[id])));
     });
 
-    it('Navigate back', (result) => {
-      expect(result).toEqual(call(NavigationActions.pop));
-    });
-
-    it('change EDIT_STATE to `false`', (result) => {
-      expect(result).toEqual(put(taskEditing(id, false)));
+    it('hide spinner', (result) => {
+      expect(result).toEqual(call(NavigationActions.hideSpinner));
     });
 
     it('end.', (result) => {
@@ -142,8 +142,8 @@ describe('`editTask` Saga test', () => {
     const error = { error: 'Task not found.' };
     const it = sagaHelper(editTask({ meta: { id }, payload }));
 
-    it('change EDIT_STATE to `true`', (result) => {
-      expect(result).toEqual(put(taskEditing(id, true)));
+    it('show spinner', (result) => {
+      expect(result).toEqual(call(NavigationActions.showSpinner));
     });
 
     it('call API', (result) => {
@@ -155,8 +155,8 @@ describe('`editTask` Saga test', () => {
       expect(result).toEqual(put(taskEditFailure(id, error)));
     });
 
-    it('change EDIT_STATE to `false`', (result) => {
-      expect(result).toEqual(put(taskEditing(id, false)));
+    it('hide spinner', (result) => {
+      expect(result).toEqual(call(NavigationActions.hideSpinner));
     });
 
     it('end.', (result) => {

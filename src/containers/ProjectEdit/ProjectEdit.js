@@ -41,13 +41,14 @@ export default class ProjectEdit extends React.Component {
   constructor(props) {
     super(props);
 
+    const { item, navigator } = props;
     this.state = {
-      name: this.props.item.get('name'),
+      name: item.get('name'),
     };
 
-    NavigationActions.setNavigator(props.navigator);
+    NavigationActions.setNavigator(navigator);
 
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+    navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
 
   onNavigatorEvent = (event) => {

@@ -6,13 +6,13 @@ const { width } = Dimensions.get('window');
 const BaseStyles = {
   container: {
     flex: 1,
-    backgroundColor: '#F4F3F1',
+    backgroundColor: Colors.background,
   },
   btn: {
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#568D8A',
+    backgroundColor: Colors.primary,
     borderRadius: 3,
   },
   btnBigCentered: {
@@ -31,16 +31,16 @@ const BaseStyles = {
     },
   },
   text: {
-    color: '#3B3B3B',
+    color: Colors.textPrimary,
     fontFamily: 'Lato',
   },
   label: {
-    color: '#747474',
+    color: Colors.gray,
     fontFamily: 'Lato',
     fontSize: 12,
   },
   input: {
-    color: '#3B3B3B',
+    color: Colors.textPrimary,
     fontFamily: 'Lato',
     fontSize: 18,
   },

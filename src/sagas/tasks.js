@@ -3,9 +3,9 @@ import { normalize } from 'normalizr';
 
 import types, {
   tasksFill, tasksFetching,
-  taskCreateSuccess, taskCreating,
-  taskEditSuccess, taskEditFailure, taskEditing,
-  taskDeleteSuccess, taskDeleteFailure, taskDeleting
+  taskCreateSuccess,
+  taskEditSuccess, taskEditFailure,
+  taskDeleteSuccess, taskDeleteFailure,
 } from '../actions/tasks';
 import { tasks, taskCreate, taskEdit, taskDelete } from '../api';
 import { taskSchema, tasksSchema } from '../api/schema';
@@ -29,7 +29,7 @@ export function* fetchTasks() {
 
 
 export function* createTask({ payload }) {
-  yield put(taskCreating(true));
+  yield call(NavigationActions.showSpinner);
   const { response } = yield call(taskCreate, payload);
 
   if (response) {
@@ -37,12 +37,12 @@ export function* createTask({ payload }) {
     yield put(taskCreateSuccess(entities.tasks[response.id]));
     yield call(NavigationActions.dismissModal);
   }
-  yield put(taskCreating(false));
+  yield call(NavigationActions.hideSpinner);
 }
 
 
 export function* editTask({ meta: { id, popScreen }, payload }) {
-  yield put(taskEditing(id, true));
+  yield call(NavigationActions.showSpinner);
   const { response, error } = yield call(taskEdit, id, payload);
 
   if (response) {
@@ -52,14 +52,14 @@ export function* editTask({ meta: { id, popScreen }, payload }) {
   } else {
     yield put(taskEditFailure(id, error));
   }
-  yield put(taskEditing(id, false));
+  yield call(NavigationActions.hideSpinner);
 }
 
 
 export function* deleteTask({ meta: { id, popScreen } }) {
-  yield put(taskDeleting(id, true));
+  yield call(NavigationActions.showSpinner);
   const { response } = yield call(taskDelete, id);
-  yield put(taskDeleting(id, false));
+  yield call(NavigationActions.hideSpinner);
 
   if (response) {
     yield put(taskDeleteSuccess(id));
