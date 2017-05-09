@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
@@ -11,7 +11,6 @@ import TaskItem from '../TaskItem/TaskItem';
 
 import { getProjectTasksIdsCompleted, getProjectTasksIdsUncompleted } from '../../selectors/tasks';
 import { getProjectsMap } from '../../selectors/projects';
-import { iconsMap } from '../../utils/AppIcons';
 
 import styles from './TasksStyles';
 
@@ -106,27 +105,29 @@ export default class Tasks extends React.Component {
     const { showCompletedTasks } = this.state;
     return (
       <View style={styles.container}>
-        <ImmutableListView
-          style={styles.tasksUncompleted}
-          immutableData={tasksIdsUncompleted}
-          renderRow={this.renderRow}
-        />
-        {tasksIdsCompleted.count() > 0 &&
-          <Button onPress={this.onToggleCompletedTasks}>
-            <View style={styles.tasksSwitcher} elevation={1}>
-              <Text style={styles.tasksSwitcherText}>
-                {showCompletedTasks ? 'HIDE' : 'SHOW'} COMPLETED TASKS
-              </Text>
-            </View>
-          </Button>
-        }
-        {showCompletedTasks &&
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <ImmutableListView
-            style={styles.tasksCompleted}
-            immutableData={tasksIdsCompleted}
+            style={styles.tasksUncompleted}
+            immutableData={tasksIdsUncompleted}
             renderRow={this.renderRow}
           />
-        }
+          {tasksIdsCompleted.count() > 0 &&
+            <Button onPress={this.onToggleCompletedTasks}>
+              <View style={styles.tasksSwitcher} elevation={1}>
+                <Text style={styles.tasksSwitcherText}>
+                  {showCompletedTasks ? 'HIDE' : 'SHOW'} COMPLETED TASKS
+                </Text>
+              </View>
+            </Button>
+          }
+          {showCompletedTasks &&
+            <ImmutableListView
+              style={styles.tasksCompleted}
+              immutableData={tasksIdsCompleted}
+              renderRow={this.renderRow}
+            />
+          }
+        </ScrollView>
         <FabButton onPress={this.onCreateTask} />
       </View>
     );

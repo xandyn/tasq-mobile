@@ -39,6 +39,12 @@ export default class Home extends Component {
     isTasksFetching: PropTypes.bool.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+
+    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+  }
+
   componentWillMount() {
     const { profileFetch, projectsFetch, tasksFetch } = this.props;
 
@@ -46,6 +52,19 @@ export default class Home extends Component {
     projectsFetch();
     tasksFetch();
   }
+
+  onNavigatorEvent = (event) => {
+    const { navigator } = this.props;
+    switch (event.id) {
+      case 'search':
+        navigator.push({
+          screen: 'tasq.SearchScreen',
+        });
+        break;
+      default:
+        break;
+    }
+  };
 
   render() {
     const { isProfileFetching, isProjectsFetching, isTasksFetching, isProfileFilled } = this.props;

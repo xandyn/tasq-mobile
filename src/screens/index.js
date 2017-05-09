@@ -8,6 +8,7 @@ import TaskEditScreen from './TaskEditScreen';
 import TaskCreateScreen from './TaskCreateScreen';
 import ProjectEditScreen from './ProjectEditScreen';
 import ProjectCreateScreen from './ProjectCreateScreen';
+import SearchScreen from './SearchScreen';
 import SpinnerScreen from './SpinnerScreen';
 
 
@@ -20,5 +21,6 @@ export default function registerScreens(store, Provider) {
   Navigation.registerComponent('tasq.TaskCreateScreen', () => TaskCreateScreen, store, Provider);
   Navigation.registerComponent('tasq.ProjectEditScreen', () => ProjectEditScreen, store, Provider);
   Navigation.registerComponent('tasq.ProjectCreateScreen', () => ProjectCreateScreen, store, Provider);
+  Navigation.registerComponent('tasq.SearchScreen', () => SearchScreen, store, Provider);
   Navigation.registerComponent('tasq.SpinnerScreen', () => SpinnerScreen, store, Provider);
 }

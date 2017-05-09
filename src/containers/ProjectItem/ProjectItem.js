@@ -3,25 +3,27 @@ import { View, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import Button from '../../components/core/Button/Button';
 
 import { getProjectsMap } from '../../selectors/projects';
+import { getProjectTasksIdsUncompleted } from '../../selectors/tasks';
 
 import styles from './ProjectItemStyles';
 
 
 @connect(
-  (_, { id }) => ({ projects }) => ({
-    item: getProjectsMap({ projects }).get(id)
+  (_, { id }) => ({ projects, tasks }) => ({
+    item: getProjectsMap({ projects }).get(id),
+    tasksIdsUncompleted: getProjectTasksIdsUncompleted({ tasks, projectId: id }),
   }),
 )
 export default class ProjectItem extends React.Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     item: ImmutablePropTypes.map.isRequired,
+    tasksIdsUncompleted: ImmutablePropTypes.list.isRequired,
     navigator: PropTypes.object.isRequired,
   };
 
@@ -38,7 +40,7 @@ export default class ProjectItem extends React.Component {
   };
 
   render() {
-    const { item } = this.props;
+    const { item, tasksIdsUncompleted } = this.props;
     const isShared = item.get('is_shared');
     return (
       <Button onPress={this.onClickProject}>
@@ -47,7 +49,9 @@ export default class ProjectItem extends React.Component {
           <Text style={styles.name} ellipsizeMode="tail" numberOfLines={1}>
             {item.get('name')}
           </Text>
-          <Text style={styles.notifications}>1</Text>
+          <Text style={styles.notifications}>
+            {!!tasksIdsUncompleted.count() && tasksIdsUncompleted.count()}
+          </Text>
         </View>
       </Button>
     );

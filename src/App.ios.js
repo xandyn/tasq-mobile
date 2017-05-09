@@ -36,6 +36,7 @@ export const startApp = () => {
     },
     animationType: 'fade',
     appStyle: {
+      orientation: 'portrait',
       navBarNoBorder: true,
       topBarElevationShadowEnabled: false,
       navBarBackgroundColor: Colors.primary,
@@ -56,7 +57,10 @@ export const startLogin = () => {
         navBarHidden: true,
       },
     },
-    animationType: 'fade'
+    animationType: 'fade',
+    appStyle: {
+      orientation: 'portrait',
+    },
   });
 };
 
