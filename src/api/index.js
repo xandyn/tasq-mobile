@@ -61,6 +61,7 @@ export const login = payload => Api.fetch('/users/auth', 'POST', payload);
 export const signup = payload => Api.fetch('/users/profile', 'POST', payload);
 
 export const profile = () => Api.fetch('/users/profile', 'GET');
+export const profileEdit = payload => Api.fetch('/users/profile', 'PUT', payload);
 
 export const projects = () => Api.fetch('/projects', 'GET');
 export const projectCreate = payload => Api.fetch('/projects', 'POST', payload);

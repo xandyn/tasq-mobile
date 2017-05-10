@@ -1,3 +1,4 @@
+import { delay } from 'redux-saga';
 import { call, take, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import { startSubmit, stopSubmit } from 'redux-form';
 
@@ -29,7 +30,10 @@ export function* authorize({ payload }) {
 
 function* logout() {
   yield call(startLogin);
-  yield call(Api.clearItems, ['jwt', 'selectedProjectId']);
+  yield call(Api.clearItems, 'jwt');
+  // iOS only, wait for animation transition to prevent render crashes
+  // before store will be completely cleared
+  yield call(delay, 500);
   yield [
     put(projectsClear()),
     put(profileClear()),

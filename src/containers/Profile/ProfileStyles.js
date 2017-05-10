@@ -27,6 +27,7 @@ export default StyleSheet.create({
     width: '100%',
     paddingHorizontal: 5,
     color: 'white',
+    textAlign: 'center',
   },
   avatar: {
     padding: 8,

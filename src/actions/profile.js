@@ -32,5 +32,37 @@ export function profileFetching(payload) {
   };
 }
 
+types.EDIT_PROFILE_REQUEST = 'profile/EDIT_PROFILE_REQUEST';
+export function profileEditRequest(payload) {
+  return {
+    type: types.EDIT_PROFILE_REQUEST,
+    payload
+  };
+}
+
+types.EDIT_PROFILE_SUCCESS = 'profile/EDIT_PROFILE_SUCCESS';
+export function profileEditSuccess(payload) {
+  return {
+    type: types.EDIT_PROFILE_SUCCESS,
+    payload
+  };
+}
+
+types.EDIT_PROFILE_FAILURE = 'profile/EDIT_PROFILE_FAILURE';
+export function profileEditFailure(payload) {
+  return {
+    type: types.EDIT_PROFILE_FAILURE,
+    payload
+  };
+}
+
+types.EDIT_PROFILE_STATE = 'profile/EDIT_PROFILE_STATE';
+export function profileEditing(payload) {
+  return {
+    type: types.EDIT_PROFILE_STATE,
+    payload
+  };
+}
+
 
 export default types;

@@ -30,6 +30,7 @@ export default class Profile extends React.Component {
   static propTypes = {
     profile: ImmutablePropTypes.map.isRequired,
     navigator: PropTypes.object.isRequired,
+    profileEditRequest: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
   };
 
@@ -71,7 +72,12 @@ export default class Profile extends React.Component {
     );
   };
 
-  saveProfile = () => {};
+  saveProfile = () => {
+    const { name } = this.state;
+    const { profileEditRequest } = this.props;
+
+    if (name.trim()) profileEditRequest({ name });
+  };
 
   render() {
     const { profile } = this.props;
