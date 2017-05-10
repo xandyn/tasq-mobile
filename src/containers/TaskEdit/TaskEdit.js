@@ -81,7 +81,6 @@ export default class TaskEdit extends React.Component {
     };
 
     NavigationActions.setNavigator(navigator);
-
     navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
 

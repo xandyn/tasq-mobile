@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { iconsMap } from '../../utils/AppIcons';
 import NavigationActions from '../../navigation';
 
 import * as projectsActions from '../../actions/projects';
@@ -35,8 +34,7 @@ class CreateProject extends React.Component {
     };
 
     NavigationActions.setNavigator(props.navigator);
-
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
 
   onNavigatorEvent = (event) => {

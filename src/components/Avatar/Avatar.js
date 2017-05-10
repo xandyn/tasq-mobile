@@ -29,13 +29,13 @@ class Avatar extends React.Component {
 
     if (avatar) {
       return (
-        <View style={{ backgroundColor: 'transparent' }} {...props}>
+        <View style={[{ backgroundColor: 'transparent' }, style]} {...props}>
           <Image
             style={[styles.icon, {
               borderRadius: size / 2,
               height: size,
               width: size,
-            }, style]}
+            }]}
             source={{ uri: avatar.url }}
           />
         </View>
@@ -52,14 +52,14 @@ class Avatar extends React.Component {
     const color = colors[charIndex % colors.length];
 
     return (
-      <View style={{ backgroundColor: 'transparent' }} {...props}>
+      <View style={[{ backgroundColor: 'transparent' }, style]} {...props}>
         <View
           style={[styles.icon, {
             borderRadius: size / 2,
             backgroundColor: color,
             height: size,
             width: size,
-          }, style]}
+          }]}
         >
           <Text
             allowFontScaling={false}

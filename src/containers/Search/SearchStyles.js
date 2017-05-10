@@ -51,8 +51,14 @@ export default StyleSheet.create({
     paddingHorizontal: 5,
   },
   backBtn: {
-    height: 35,
-    marginLeft: 5,
+    ...Platform.select({
+      ios: {
+        marginLeft: 0,
+      },
+      android: {
+        marginLeft: 10,
+      }
+    }),
     paddingHorizontal: 8,
   },
   clearBtn: {

@@ -57,8 +57,7 @@ export default class CreateProject extends React.Component {
     };
 
     NavigationActions.setNavigator(props.navigator);
-
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
 
   onNavigatorEvent = (event) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, TextInput, TouchableOpacity } from 'react-native';
+import { View, TextInput, TouchableOpacity, Platform } from 'react-native';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import ImmutableListView from 'react-native-immutable-list-view';
@@ -51,7 +51,11 @@ export default class Search extends React.Component {
           <View style={styles.navBar}>
             <View style={styles.backBtn}>
               <TouchableOpacity onPress={() => navigator.pop()}>
-                <Icon name="ios-arrow-round-back" size={35} color="white" />
+                <Icon
+                  name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'}
+                  size={Platform.OS === 'ios' ? 35 : 30}
+                  color="white"
+                />
               </TouchableOpacity>
             </View>
             <TextInput
@@ -63,7 +67,7 @@ export default class Search extends React.Component {
               value={searchQuery}
               onChangeText={v => this.setState({ searchQuery: v })}
               placeholder="Search..."
-              placeholderTextColor="white"
+              placeholderTextColor="rgba(255,255,255,0.5)"
               underlineColorAndroid="transparent"
             />
             <View style={styles.clearBtn}>

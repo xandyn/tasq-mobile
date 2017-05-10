@@ -47,7 +47,6 @@ export default class ProjectEdit extends React.Component {
     };
 
     NavigationActions.setNavigator(navigator);
-
     navigator.setOnNavigatorEvent(this.onNavigatorEvent);
   }
 

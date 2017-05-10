@@ -56,6 +56,12 @@ export default class Home extends Component {
   onNavigatorEvent = (event) => {
     const { navigator } = this.props;
     switch (event.id) {
+      case 'profile':
+        navigator.push({
+          screen: 'tasq.ProfileScreen',
+          backButtonTitle: '',
+        });
+        break;
       case 'search':
         navigator.push({
           screen: 'tasq.SearchScreen',
