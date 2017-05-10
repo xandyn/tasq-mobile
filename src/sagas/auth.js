@@ -6,7 +6,6 @@ import { projectsClear } from '../actions/projects';
 import { profileClear } from '../actions/profile';
 import { tasksClear } from '../actions/tasks';
 import { usersClear } from '../actions/users';
-import { uiClear } from '../actions/ui';
 import Api, { login, signup } from '../api';
 import { startApp, startLogin } from '../App';
 
@@ -36,7 +35,6 @@ function* logout() {
     put(profileClear()),
     put(tasksClear()),
     put(usersClear()),
-    put(uiClear())
   ];
 }
 
