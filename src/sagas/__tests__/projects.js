@@ -45,7 +45,7 @@ describe('`fetchProjects` Saga test', () => {
     const normalizedData = normalize(response.results, projectsSchema);
     const payload = {
       ids: normalizedData.result,
-      map: normalizedData.entities.projects
+      map: normalizedData.entities.projects || []
     };
     expect(result).toEqual(put(projectsFill(payload)));
   });
@@ -53,7 +53,7 @@ describe('`fetchProjects` Saga test', () => {
   it('fill users', (result) => {
     const normalizedData = normalize(response.results, projectsSchema);
     const payload = {
-      map: normalizedData.entities.users
+      map: normalizedData.entities.users || []
     };
     expect(result).toEqual(put(usersFill(payload)));
   });

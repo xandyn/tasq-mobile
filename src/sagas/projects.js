@@ -21,10 +21,10 @@ export function* fetchProjects() {
     const normalizedData = normalize(response.results, projectsSchema);
     const payload = {
       ids: normalizedData.result,
-      map: normalizedData.entities.projects
+      map: normalizedData.entities.projects || []
     };
     yield put(projectsFill(payload));
-    yield put(usersFill({ map: normalizedData.entities.users }));
+    yield put(usersFill({ map: normalizedData.entities.users || [] }));
   }
   yield put(projectsFetching(false));
 }

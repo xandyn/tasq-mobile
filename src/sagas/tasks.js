@@ -20,7 +20,7 @@ export function* fetchTasks() {
     const normalizedData = normalize(response.results, tasksSchema);
     const payload = {
       ids: normalizedData.result,
-      map: normalizedData.entities.tasks
+      map: normalizedData.entities.tasks || []
     };
     yield put(tasksFill(payload));
   }

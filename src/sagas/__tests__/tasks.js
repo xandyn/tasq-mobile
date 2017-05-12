@@ -31,7 +31,7 @@ describe('`fetchTasks` Saga test', () => {
     const normalizedData = normalize(response.results, tasksSchema);
     const payload = {
       ids: normalizedData.result,
-      map: normalizedData.entities.tasks
+      map: normalizedData.entities.tasks || []
     };
     expect(result).toEqual(put(tasksFill(payload)));
   });

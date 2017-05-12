@@ -27,7 +27,7 @@ export function* editProfile({ payload }) {
 
   if (response) {
     yield put(profileEditSuccess(response));
-    yield call(NavigationActions.pop);
+    yield call(NavigationActions.popToRoot);
   } else {
     yield put(profileEditFailure(error));
   }
