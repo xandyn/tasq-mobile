@@ -1,5 +1,7 @@
 # tasq-mobile
 
+![](http://i.imgur.com/6IZKoTM.gif)
+
 ## Things todo
 
 * **Offline support (redux-offline)**

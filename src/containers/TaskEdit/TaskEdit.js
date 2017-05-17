@@ -12,7 +12,6 @@ import DateTimePicker from '../../components/DateTimePicker/DateTimePicker';
 
 import { getProjectsMap } from '../../selectors/projects';
 import { getTasksMap } from '../../selectors/tasks';
-import { iconsMap } from '../../utils/AppIcons';
 import NavigationActions from '../../navigation';
 
 import { getUserById, getUsersByIds } from '../../selectors/users';
@@ -153,17 +152,19 @@ export default class TaskEdit extends React.Component {
           handleDatePicker={v => this.setState({ notificationDate: v })}
           placeholder="Remind me"
         />
-        <TextInput
-          multiline
-          autoCapitalize="none"
-          style={styles.textArea}
-          placeholderTextColor={Colors.textSecondary}
-          value={note}
-          name="note"
-          onChangeText={v => this.setState({ note: v })}
-          placeholder="Add note"
-          underlineColorAndroid="transparent"
-        />
+        <View style={styles.note}>
+          <TextInput
+            multiline
+            autoCapitalize="none"
+            style={styles.textArea}
+            placeholderTextColor={Colors.textSecondary}
+            value={note}
+            name="note"
+            onChangeText={v => this.setState({ note: v })}
+            placeholder="Add note"
+            underlineColorAndroid="transparent"
+          />
+        </View>
         <Button onPress={this.onDelete}>
           <View style={styles.delete} elevation={1}>
             <Text style={styles.deleteText}>

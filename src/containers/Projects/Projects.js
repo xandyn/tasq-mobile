@@ -7,6 +7,7 @@ import ImmutableListView from 'react-native-immutable-list-view';
 
 import ProjectItem from '../ProjectItem/ProjectItem';
 import FabButton from '../../components/FabButton/FabButton';
+import Empty from '../../components/Empty/Empty';
 
 import { getProjectsIds } from '../../selectors/projects';
 
@@ -47,10 +48,14 @@ export default class Projects extends React.Component {
     const { projectsIds } = this.props;
     return (
       <View style={styles.container}>
-        <ImmutableListView
-          immutableData={projectsIds}
-          renderRow={this.renderRow}
-        />
+        {projectsIds.count() ? (
+          <ImmutableListView
+            immutableData={projectsIds}
+            renderRow={this.renderRow}
+          />
+        ) : (
+          <Empty text={'No projects created,\n please create a new one'} />
+        )}
         <FabButton onPress={this.onCreateProject} />
       </View>
     );

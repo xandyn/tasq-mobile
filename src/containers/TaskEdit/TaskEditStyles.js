@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet } from 'react-native';
 import BaseStyles from '../../styles/Base';
 import Colors from '../../styles/Colors';
 
@@ -28,15 +28,18 @@ export default StyleSheet.create({
     backgroundColor: 'white',
     marginBottom: 1,
   },
+  note: {
+    backgroundColor: Colors.note,
+    paddingVertical: 10,
+    marginBottom: 1,
+  },
   textArea: {
     ...BaseStyles.input,
     textAlignVertical: 'top',
-    paddingVertical: Platform.OS === 'ios' ? 10 : 20,
     paddingHorizontal: 20,
-    height: 180,
+    height: 120,
     width: '100%',
-    backgroundColor: 'white',
-    marginBottom: 1,
+    backgroundColor: 'transparent',
   },
   datePicker: {
     justifyContent: 'center',

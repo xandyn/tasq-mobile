@@ -28,15 +28,18 @@ export default StyleSheet.create({
     backgroundColor: 'white',
     marginBottom: 1,
   },
+  note: {
+    backgroundColor: Colors.note,
+    paddingVertical: 10,
+    marginBottom: 1,
+  },
   textArea: {
     ...BaseStyles.input,
     textAlignVertical: 'top',
-    marginVertical: 10,
     paddingHorizontal: 20,
-    height: 180,
+    height: 120,
     width: '100%',
-    backgroundColor: 'white',
-    marginBottom: 1,
+    backgroundColor: 'transparent',
   },
   datePicker: {
     justifyContent: 'center',

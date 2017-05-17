@@ -7,6 +7,7 @@ import ImmutableListView from 'react-native-immutable-list-view';
 
 import Button from '../../components/core/Button/Button';
 import FabButton from '../../components/FabButton/FabButton';
+import Empty from '../../components/Empty/Empty';
 import TaskItem from '../TaskItem/TaskItem';
 
 import { getProjectTasksIdsCompleted, getProjectTasksIdsUncompleted } from '../../selectors/tasks';
@@ -105,29 +106,33 @@ export default class Tasks extends React.Component {
     const { showCompletedTasks } = this.state;
     return (
       <View style={styles.container}>
-        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <ImmutableListView
-            style={styles.tasksUncompleted}
-            immutableData={tasksIdsUncompleted}
-            renderRow={this.renderRow}
-          />
-          {tasksIdsCompleted.count() > 0 &&
-            <Button onPress={this.onToggleCompletedTasks}>
-              <View style={styles.tasksSwitcher} elevation={1}>
-                <Text style={styles.tasksSwitcherText}>
-                  {showCompletedTasks ? 'HIDE' : 'SHOW'} COMPLETED TASKS
-                </Text>
-              </View>
-            </Button>
-          }
-          {showCompletedTasks &&
+        {(tasksIdsCompleted.count() || tasksIdsUncompleted.count()) ? (
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <ImmutableListView
-              style={styles.tasksCompleted}
-              immutableData={tasksIdsCompleted}
+              style={styles.tasksUncompleted}
+              immutableData={tasksIdsUncompleted}
               renderRow={this.renderRow}
             />
-          }
-        </ScrollView>
+            {tasksIdsCompleted.count() > 0 &&
+              <Button onPress={this.onToggleCompletedTasks}>
+                <View style={styles.tasksSwitcher} elevation={1}>
+                  <Text style={styles.tasksSwitcherText}>
+                    {showCompletedTasks ? 'HIDE' : 'SHOW'} COMPLETED TASKS
+                  </Text>
+                </View>
+              </Button>
+            }
+            {showCompletedTasks &&
+              <ImmutableListView
+                style={styles.tasksCompleted}
+                immutableData={tasksIdsCompleted}
+                renderRow={this.renderRow}
+              />
+            }
+          </ScrollView>
+        ) : (
+          <Empty text={'No tasks created,\n please create a new one'} />
+        )}
         <FabButton onPress={this.onCreateTask} />
       </View>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, TextInput, Platform } from 'react-native';
+import { View, ScrollView, TextInput } from 'react-native';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
@@ -9,7 +9,6 @@ import moment from 'moment';
 import UserPicker from '../../components/UserPicker/UserPicker';
 import DateTimePicker from '../../components/DateTimePicker/DateTimePicker';
 
-import { iconsMap } from '../../utils/AppIcons';
 import NavigationActions from '../../navigation';
 
 import { getProjectsMap } from '../../selectors/projects';
@@ -118,17 +117,19 @@ export default class CreateProject extends React.Component {
           handleDatePicker={v => this.setState({ notificationDate: v })}
           placeholder="Remind me"
         />
-        <TextInput
-          multiline
-          autoCapitalize="none"
-          style={styles.textArea}
-          placeholderTextColor={Colors.textSecondary}
-          value={note}
-          name="note"
-          onChangeText={v => this.setState({ note: v })}
-          placeholder="Add note"
-          underlineColorAndroid="transparent"
-        />
+        <View style={styles.note}>
+          <TextInput
+            multiline
+            autoCapitalize="none"
+            style={styles.textArea}
+            placeholderTextColor={Colors.textSecondary}
+            value={note}
+            name="note"
+            onChangeText={v => this.setState({ note: v })}
+            placeholder="Add note"
+            underlineColorAndroid="transparent"
+          />
+        </View>
       </ScrollView>
     );
   }
