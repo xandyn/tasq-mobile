@@ -3,6 +3,7 @@
 ## Things todo
 
 * **Offline support (redux-offline)**
+* **CodePush (with sagas)**
 * **Push notifications**
 * **Chat on SocketIO**
 
