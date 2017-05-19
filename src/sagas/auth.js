@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native';
 import { delay } from 'redux-saga';
 import { call, take, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import { startSubmit, stopSubmit } from 'redux-form';
@@ -30,7 +31,7 @@ export function* authorize({ payload }) {
 
 function* logout() {
   yield call(startLogin);
-  yield call(Api.clearItems, 'jwt');
+  yield call(AsyncStorage.clear);
   // iOS only, wait for animation transition to prevent render crashes
   // before store will be completely cleared
   yield call(delay, 500);
