@@ -1,13 +1,13 @@
 # tasq-mobile
 
-![](http://i.imgur.com/6IZKoTM.gif)
+![](http://i.imgur.com/vYVYKwG.gif)
 
 ## Things todo
 
-* **Offline support (redux-offline)**
-* **CodePush (with sagas)**
-* **Push notifications**
-* **Chat on SocketIO**
+- [x] CodePush (with sagas)
+- [ ] Offline support (redux-offline)
+- [ ] Push notifications
+- [ ] Chat on SocketIO
 
 ### Install
 ```sh
